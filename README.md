@@ -1,5 +1,5 @@
 # Text Mining and Sentiment Analysis in R
-Aleszu Bajak
+Instructor: [Aleszu Bajak](http://aleszu.com/)
 
 # Introduction
 
@@ -256,7 +256,6 @@ Now we see some interesting bigrams like "MS 13," "North Korea" and "immigration
 Finally, let's change the "n" argument to "3" and count the trigrams.
 
 ```{r}
-
 # Trigrams
 trump_trigrams <- trump_speech_tbl %>%
   unnest_tokens(trigram, value, token = "ngrams", n = 3) 
@@ -320,7 +319,10 @@ ggplot(speeches_w_keyword, aes(date,count)) +
   geom_line(stat="identity")
 ```
 
-**Question:** Take a look at this helpful stringr [cheat sheet](https://github.com/rstudio/cheatsheets/raw/master/strings.pdf) from RStudio. Notice all the fun things you can do! What other string-based questions might you want to ask this dataset? 
+## Q&A
+**Question 1:** Take a look at this helpful stringr cheat sheet [here](https://github.com/rstudio/cheatsheets/raw/master/strings.pdf) or below. What other string-based questions might you want to ask this dataset? 
+
+**Question 2:** Based on the n-gram analysis and string-based calculations we've performed, what other questions could you come up with for the State of the Union speeches or what other dataset might you want to compile for one of the methodologies practices above?
 
 ![img](img/stringr-cheatsheet.png)
 
