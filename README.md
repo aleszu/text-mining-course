@@ -272,6 +272,57 @@ trigram_counts
 **Question:** How would you summarize these results for a non-technical audience? Could you design a top 10 table with your exported CSV in Excel and embed it alongside your code? What would your headline be for this State of the Union speech in particular?  
 
 
+## Doing string calculations
+
+The stringr package brings together loads of useful tools for string manipulation and calculation. 
+
+```{r}
+# Calculate length of strings with "str_length"
+line <- c("The quick brown fox jumps over the lazy dog.") 
+line 
+
+library(stringr)
+str_length(line) 
+
+sou <- read_csv("sou.csv")
+glimpse(sou)
+
+length_of_sous <- sou %>%
+  mutate(length = str_length(text))
+
+glimpse(length_of_sous)
+
+# Plot it 
+ggplot(length_of_sous, aes(date, length)) +
+  geom_point()
+
+# Search for a string with "str_detect"
+speeches_w_keyword <- sou %>%
+  group_by(text, date, president, message) %>%
+  mutate(count = str_count(text, "health care")) # try "people" or "crime" 
+speeches_w_keyword
+
+# Plot it
+ggplot(speeches_w_keyword, aes(date,count)) +
+  geom_line(stat="identity")
+```
+
+**Question:** What other string-based questions might you want to ask this dataset?
+
+Here's a helpful stringr [cheat sheet](https://github.com/rstudio/cheatsheets/raw/master/strings.pdf) from RStudio. Notice all the fun things you can do!
+
+![img](img/stringr-cheatsheet.png)
+
+
+### Parts-of-speech analysis
+
+
+```{r}
+
+```
+
+
+
 # Sentiment analysis methods
 
 
