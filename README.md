@@ -168,14 +168,14 @@ Let's also remove the stop words using the anti_join() function, [which is well 
 
 ![img](img/joins-slide.png)
 
-We can always inspect this or any table in RStudio using View(). 
+We can always inspect this with glimpse(). 
 
 ```{r}
 line_clean <- line_tokenized %>% 
   anti_join(stop_words) # cut out stopwords 
 line_clean 
 
-View(stop_words) # let's inspect stopwords. 
+glimpse(stop_words) # let's inspect stopwords. 
 ```
 
 **Question**: Are all of these stopwords really worth cutting out? Can you find one that you want to include in your analysis?
@@ -443,7 +443,7 @@ ggplot(candidate_tweets, aes(date, fill=party)) +
   theme_minimal() 
 ```
 
-Next, we tokenize and score the tweets with the labMT dictionary. Important: We need to group_by() tweet to get average sentiment of the overall tweet. 
+Next, we tokenize and score the tweets with the labMT dictionary. 
 
 ```{r}
 tokenized_tweets <- candidate_tweets %>%
@@ -453,7 +453,7 @@ tokenized_tweets <- candidate_tweets %>%
 
 all_sentiment <- tokenized_tweets %>%  
   inner_join(labMT, by = "word") %>%
-  group_by(tweet, name, party, followers_count, percent_of_vote) %>%  
+  group_by(status_id, name, party, followers_count, percent_of_vote) %>%  
   summarise(sentiment = mean(score)) %>% 
   arrange(desc(sentiment))  %>%
   glimpse()
