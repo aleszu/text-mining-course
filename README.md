@@ -487,12 +487,14 @@ ggplot(final_pivot, aes(y=percent_of_vote, x=avgscore, color=party)) +
 
 # Visualization and communication
 
-## Wordclouds
-
-## Bar charts for simple and effective communication
+## Tips for simple and effective communication
 
 ## Tables 
 
-## Scatterplots 
+## Bar charts 
+
+## Wordclouds
+
+## Scatterplots and more
 
 
