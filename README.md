@@ -391,7 +391,10 @@ ggplot(sentiment_by_president, aes(reorder(president, avgscore), avgscore)) +
 ![img](img/sentpresident.png)
 
 
-**Question:** Do you have any idea why a particular president is in a particular spot? Why might FDR, for example, be near the bottom? 
+**Question 1:** Do you have any idea why a particular president is in a particular spot? Why might FDR, for example, be near the bottom? 
+
+**Question 2:** How would you label the x-axis? What's going to be most clear and who is your intended audience?
+
 
 Let's now look at the sentiment of State of the Union speeches over time. Instead of organizing by president, we can group_by() message and date. Plotting that as a scatterplot and fitting a linear regression to the data, we see that the speeches appear to be relatively stable, in terms of sentiment, across time.
 
