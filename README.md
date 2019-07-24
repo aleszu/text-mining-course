@@ -130,9 +130,11 @@ The community of tidytext users is large and very open to sharing code. Here are
 ![img](img/harrypotter.png)
 
 
-## Q&A 
+## Discussion
 
-**Question:** What real-world text analysis projects stuck out to you as memorable? Why? What was harder to get your head around and why? 
+**Question 1:** What real-world text analysis projects stuck out to you as memorable? Why? What was harder to get your head around and why? 
+
+**Question 2:** Choose one of the projects and write out some potential caveats, assumptions and/or problems faced with data collection, analysis or communication. Share via the group chat. 
 
 
 # Text analysis methods
@@ -178,7 +180,7 @@ line_clean
 glimpse(stop_words) # let's inspect stopwords. 
 ```
 
-**Question**: Are all of these stopwords really worth cutting out? Can you find one that you want to include in your analysis?
+**Question**: Are all of these stop words really worth cutting out? Can you find one that you want to include in your analysis?
 
 
 ## n-gram analysis
