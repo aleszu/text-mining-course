@@ -7,7 +7,7 @@ This O'Reilly course will introduce participants to the techniques and applicati
 
 Using **RStudio** and several engaging and topical datasets sourced from **politics, social science, and social media**, this course will introduce **techniques for collecting, wrangling, mining and analyzing text data**. 
 
-The course will also have participants derive and communicate insights based on their textual analysis using a set of data visualization methods. The techniques that will be used include n-gram analysis, sentiment analysis, and part-of-speech analysis.
+The course will also have participants derive and communicate insights based on their textual analysis using a set of data visualization methods. The techniques that will be used include n-gram analysis, sentiment analysis, and parts-of-speech analysis.
 
 By the end of this live, hands-on, online course, you’ll understand:
 
