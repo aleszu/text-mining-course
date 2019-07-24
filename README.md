@@ -93,7 +93,7 @@ Crimson Hexagon, recently acquired by Brandwatch, delivers "actionable social in
 
 ## Sentiment analysis in the wild
 
-FiveThirtyEight [applied sentiment analysis](https://fivethirtyeight.com/features/the-happiest-and-saddest-fans-in-baseball-according-to-reddit/) to Reddit comments to assess the overall "sadness" of baseball fans summarized team.. 
+FiveThirtyEight [applied sentiment analysis](https://fivethirtyeight.com/features/the-happiest-and-saddest-fans-in-baseball-according-to-reddit/) to Reddit comments to assess the overall "sadness" of baseball fans summarized by team. 
 
 ![img](img/538-baseball-sad.png)
 
