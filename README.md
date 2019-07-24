@@ -24,7 +24,7 @@ And you’ll be able to:
 
 # Requirements and accessing data
 
-Ideally, participants will have the **latest versions of R and RStudio** and the **tidytext** and **tidyverse**. To access all R scripts, participants should next download [this Github repository]() and set it as their working directory in RStudio using setwd(). 
+Ideally, participants will have the **latest versions of R and RStudio** and the **tidytext** and **tidyverse**. To access all R scripts, participants should next download [this Github repository](https://github.com/aleszu/text-mining-course) and set it as their working directory in RStudio using setwd(). 
 
 This course can also be accessed on **RStudio Cloud** [here](TKTKTKKT).
 
