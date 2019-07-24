@@ -145,7 +145,11 @@ This section will introduce methods for tokenization, n-gram analysis, hierarchi
 First let's do some basic text ingestion and analysis using tidytext functions like unnest_tokens() for tokenizing and count() for, well, counting. 
 
 ```{r}
-### Text and tokenization
+# Load packages
+library(tidyverse)
+library(tidytext)
+
+# Text and tokenization
 line <- c("The quick brown fox jumps over the lazy dog.") 
 line 
 
@@ -321,16 +325,69 @@ ggplot(speeches_w_keyword, aes(date,count)) +
 ![img](img/stringr-cheatsheet.png)
 
 
-### Parts-of-speech analysis
-
-
-```{r}
-
-```
-
-
 
 # Sentiment analysis methods
+
+Sentiment analysis is being widely applied to understand politics, finance or sports, as we saw from our examples analyzing the sentiment of social media from candidates running for Senate, news articles about a particular company or product, and Reddit comments from baseball fans. 
+
+While sentiment analysis can involve complex natural language processing models like [word2vec](https://skymind.ai/wiki/word2vec), for the purposes of this course we'll explore its simplest form: scoring individual words based on a dictionary of word/score pairs. Let's look at some sentiment dictionaries.
+
+```{r}
+# Sentiment dictionaries
+afinn <- get_sentiments("afinn")
+afinn 
+
+bing <- get_sentiments("bing")
+bing
+
+nrc <- get_sentiments("nrc")
+nrc
+
+labMT<- read.csv("https://raw.githubusercontent.com/aleszu/textanalysis-shiny/master/labMT2english.csv", sep="\t")
+labMT <- as.tibble(labMT)
+labMT
+```
+
+Let's use the afinn dictionary to score the State of the Union speeches. The following code will use inner_join() to merge in the afinn word/score dictionary and leave only those words that have been scored. Next, we can create a pivot table that summarizes the average sentiment score by president. Finally, we'll plot the results as a bar chart. 
+
+```{r}
+sentiment_sou <- sou %>%
+  unnest_tokens(word, text) %>%
+  inner_join(afinn, by = "word") # we'll join in the AFINN dictionary
+glimpse(sentiment_sou)
+
+sentiment_by_president <- sentiment_sou %>%
+  group_by(president) %>% 
+  summarise(avgscore = mean(score)) %>%
+  arrange(desc(avgscore))
+
+ggplot(sentiment_by_president, aes(reorder(president, avgscore), avgscore)) +
+  geom_col() +
+  coord_flip()
+```
+
+**Question:** Do you have any idea why a particular president is in a particular spot? Why might FDR, for example, be near the bottom? 
+
+Let's now look at the sentiment of State of the Union speeches over time. Instead of organizing by president, we can group_by() message and date. Plotting that as a scatterplot and fitting a linear regression to the data, we see that the speeches appear to be relatively stable, in terms of sentiment, across time.
+
+```{r}
+sentiment_sou_afinn <- sentiment_sou %>%
+  group_by(message, date) %>% # We "group by" message and date instead of by president
+  summarise(avgscore = mean(score)) %>%
+  glimpse()
+
+ggplot(sentiment_sou_afinn, aes(date, avgscore)) +
+  geom_point() + 
+  geom_smooth(method="lm")
+```
+
+**Question:** What other insights might you want to communicate alongside this chart? 
+
+# Activity 
+
+You have the "labMT" dictionary. Swap it in for "afinn" in the inner_join() function and try to recreate the scatterplot with the labMT-scored speeches. 
+
+**Question:** What difference do you notice when the speeches are scored with the labMT dictionary?  
 
 
 # Visualization and communication
