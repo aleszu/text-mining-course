@@ -1,11 +1,7 @@
 # Text Mining and Sentiment Analysis in R
 Aleszu Bajak
 
-1. [Outline](#outline)
-2. [Text analysis in the wild](#text-analysis-in-the-wild)
-3. [Text analysis methods](#text-analysis-methods)
-4. [Sentiment analysis methods](#sentiment-analysis-methods)
-5. [Visualization and communication](#visualization-and-communication)
+# Introduction
 
 This O'Reilly course will introduce participants to the techniques and applications of **text mining and sentiment analysis** by training them in easy-to-use open-source tools and scalable, replicable methodologies that will make them stronger data scientists and more thoughtful communicators. 
 
@@ -33,7 +29,24 @@ Ideally, participants will have the **latest versions of R and RStudio** and the
 This course can also be accessed on **RStudio Cloud** [here](TKTKTKKT).
 
 
-# Datasets include:
+# Table of contents
+
+1. [Course outline](#course-outline)
+2. [Datasets used](#datasets-used)
+2. [Text analysis in the wild](#text-analysis-in-the-wild)
+3. [Text analysis methods](#text-analysis-methods)
+4. [Sentiment analysis methods](#sentiment-analysis-methods)
+5. [Visualization and communication](#visualization-and-communication)
+
+
+# Course outline
+
+- We'll first explore several real-world applications of data mining and sentiment analysis. 
+- Next, we'll walk through several techniques using R. 
+- Finally, we'll explore techniques to visualize and communicate insights about those textual data.
+
+
+# Datasets used
 
 - [U.S. State of the Union speeches](sou.csv)
 - [Trump's 2018 SOTU](trump2018.txt) 
@@ -45,14 +58,7 @@ This course can also be accessed on **RStudio Cloud** [here](TKTKTKKT).
 
 Text mining is all about making sense of text. That could mean counting the frequency of specific words, understanding the overall sentiment of a document, or applying statistical techniques to draw big-picture conclusions from a corpus. Whether one is analyzing social media posts, customer reviews or news articles, these techniques can be essential to understanding and deriving meaningful insights. 
 
-Note: Though there are several ways to mine data and perform sentiment analysis in R -- with packages such as [tm](https://cran.r-project.org/web/packages/tm/), [quanteda](https://cran.r-project.org/web/packages/quanteda/), and [sentimentr](https://cran.r-project.org/web/packages/sentimentr/index.html) -- this course uses R's [tidytext](http://tidytextmining.com/) package, developed by Julia Silge and David Robinson, and several tidy tools found in the [tidyverse](https://cran.r-project.org/web/packages/tidyverse/index.html) package. 
-
-
-# Outline
-
-- We'll first explore several real-world applications of data mining and sentiment analysis. 
-- Next, we'll walk through several techniques using R. 
-- Finally, we'll explore techniques to visualize and communicate insights about those textual data.
+Note: Though there are several ways to mine data and perform sentiment analysis in R -- with packages such as [tm](https://cran.r-project.org/web/packages/tm/), [quanteda](https://cran.r-project.org/web/packages/quanteda/), and [sentimentr](https://cran.r-project.org/web/packages/sentimentr/index.html) -- this course uses R's [tidytext](http://tidytextmining.com/) package, developed by Julia Silge and David Robinson, and several tidy tools found in the [tidyverse](https://cran.r-project.org/web/packages/tidyverse/index.html) package.
 
 
 # Text analysis in the wild
@@ -76,12 +82,14 @@ The Boston Globe's [Arresting Words investigation](https://apps.bostonglobe.com/
 ![img](img/globe-arresting2.png)
 ![img](img/globe-arresting.png)
 
+
 ## Text analysis in marketing 
 
 Crimson Hexagon, recently acquired by Brandwatch, delivers "actionable social insights for the enterprise," i.e. how is Under Armour clothing or Shock Top beer [being discussed online](https://www.slideshare.net/liberateyourbrand/crimson-hexagon-10-2030)? 
 
 ![img](img/crimson-hexagon-underarmour.jpg)
 ![img](img/crimson-hexagon.png)
+
 
 ## Sentiment analysis in the wild
 
@@ -99,6 +107,7 @@ FiveThirtyEight used sentiment analysis to help [contrast presidential inaugurat
 
 ![img](img/538-positive-inauguraladdresses.png)
 
+
 ## Sentiment analysis in finance
 
 Bloomberg routinely analyzes Twitter sentiment surrounding keywords, companies and entities, [such as this 2017 Vodaphone analysis](https://www.bloomberg.com/professional/blog/twitter-trade-profits-vodafone-courts-idea-cellular-india/), to better inform the trading strategies of its clients.
@@ -109,22 +118,25 @@ J.P. Morgan [has published about sentiment analysis](https://www.jpmorgan.com/gl
 
 ![img](img/jpmorgan.png)
 
+
 ## Text mining on craft beer data
 
-The community of tidytext users is large and very open to sharing code. Here are some examples of informal text mining and sentiment analyses that have been popoular on the Internet. One looked at [craft beer reviews](https://www.kaylinpavlik.com/tidy-text-beer/), 
+The community of tidytext users is large and very open to sharing code. Here are some examples of informal text mining and sentiment analyses that have been popoular on the Internet: [craft beer reviews](https://www.kaylinpavlik.com/tidy-text-beer/) and [Harry Potter books](https://cfss.uchicago.edu/notes/harry-potter-exercise/).
 
 ![img](img/beeradvocate.png)
 
 ![img](img/harrypotter.png)
 
+
 ## Q&A 
 
-What real-world text analysis projects stuck out to you as memorable? Why? What was harder to get your head around and why? 
+**Question:** What real-world text analysis projects stuck out to you as memorable? Why? What was harder to get your head around and why? 
 
 
 # Text analysis methods
 
-This section will introduce methods for tokenization, n-gram analysis, hierarchical cluster analysis and part-of-speech analysis. Click [here](http://TKTKKTTKTK) for the R cheat sheet and dataset. We will conduct a brief text analysis activity to isolate top words, top phrases and top parts of speech for that dataset. 
+This section will introduce methods for tokenization, n-gram analysis, hierarchical cluster analysis and part-of-speech analysis. We will then conduct a brief text analysis activity to isolate top words, top phrases and top parts of speech for a dataset. 
+
 
 ## Tokenization
 
