@@ -456,7 +456,9 @@ all_sentiment <- tokenized_tweets %>%
   glimpse()
 ```
 
-Next, we create a pivot table that calculates the average score per candidate and plot that as a scatterplot with custom colors, a custom scale range for the points (whose size is mapped to the candidate's number of followers), and trend lines for each party. Your graphic should look very similar to the final visual that appeared with the article. 
+Next, we create a pivot table that calculates the average score per candidate and plot that as a scatterplot with custom colors, a custom scale range for the points (whose size is mapped to the candidate's number of followers), and trend lines for each party. 
+
+Your graphic should look very similar to the final visual that appeared with the article. Notice we can customize the axis labels using ggplot2's xlab() and ylab(). 
 
 ```{r}
 final_pivot <- all_sentiment %>% 
