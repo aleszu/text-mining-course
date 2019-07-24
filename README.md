@@ -274,28 +274,35 @@ trigram_counts
 
 ## Doing string calculations
 
-The stringr package brings together loads of useful tools for string manipulation and calculation. 
+The stringr package brings together loads of useful tools for string manipulation and calculation. Below, run through the code to see how str_length() can be used to calculate the length of strings. 
 
 ```{r}
-# Calculate length of strings with "str_length"
+# Calculate length of strings 
 line <- c("The quick brown fox jumps over the lazy dog.") 
 line 
 
 library(stringr)
 str_length(line) 
+```
 
+Next, we'll pull in the State of the Union speeches CSV file and create a new object with a new column "length." In this new column, we'll store the length of each speech we calculate with str_length().  Using the ggplot2 package we can plot a scatterplot of date vs. length to visualize the length of the speeches over time.  
+
+```{r}
 sou <- read_csv("sou.csv")
 glimpse(sou)
 
 length_of_sous <- sou %>%
   mutate(length = str_length(text))
-
 glimpse(length_of_sous)
 
 # Plot it 
 ggplot(length_of_sous, aes(date, length)) +
   geom_point()
+```
 
+We can also create something akin to the Google n-gram viewer by "searching" through the speeches using "str_count" and calculating the number of times a specific keyword or phrase appears. We can then plot the output as a line chart. 
+
+```{r}
 # Search for a string with "str_detect"
 speeches_w_keyword <- sou %>%
   group_by(text, date, president, message) %>%
@@ -307,9 +314,7 @@ ggplot(speeches_w_keyword, aes(date,count)) +
   geom_line(stat="identity")
 ```
 
-**Question:** What other string-based questions might you want to ask this dataset?
-
-Here's a helpful stringr [cheat sheet](https://github.com/rstudio/cheatsheets/raw/master/strings.pdf) from RStudio. Notice all the fun things you can do!
+**Question:** Take a look at this helpful stringr [cheat sheet](https://github.com/rstudio/cheatsheets/raw/master/strings.pdf) from RStudio. Notice all the fun things you can do! What other string-based questions might you want to ask this dataset? 
 
 ![img](img/stringr-cheatsheet.png)
 
