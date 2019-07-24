@@ -1,5 +1,11 @@
 # Text Mining and Sentiment Analysis in R
-# Aleszu Bajak
+Aleszu Bajak
+
+1. [Outline](#outline)
+2. [Text analysis in the wild](#text-analysis-in-the-wild)
+3. [Text analysis methods](text-analysis-methods)
+4. [Sentiment analysis methods](sentiment-analysis-methods)
+5. [Visualization and communication](visualization-and-communication)
 
 This O'Reilly course will introduce participants to the techniques and applications of **text mining and sentiment analysis** by training them in easy-to-use open-source tools and scalable, replicable methodologies that will make them stronger data scientists and more thoughtful communicators. 
 
@@ -35,7 +41,7 @@ This course can also be accessed on **RStudio Cloud** [here](TKTKTKKT).
 - [Tweets by U.S. Senate candidates through 2018](alltweets.zip)
 
 
-# Text as data and real-world applications
+# Text as data 
 
 Text mining is all about making sense of text. That could mean counting the frequency of specific words, understanding the overall sentiment of a document, or applying statistical techniques to draw big-picture conclusions from a corpus. Whether one is analyzing social media posts, customer reviews or news articles, these techniques can be essential to understanding and deriving meaningful insights. 
 
@@ -49,7 +55,7 @@ Note: Though there are several ways to mine data and perform sentiment analysis 
 - Finally, we'll explore techniques to visualize and communicate insights about those textual data.
 
 
-### Text analysis in the wild
+# Text analysis in the wild
 
 BuzzFeed's [analysis of U.S. State of the Union speeches](https://www.buzzfeednews.com/article/peteraldhous/trump-state-of-the-union-words) over time is a great example of text analysis. As an added bonus, journalist Peter Aldhous shared all his data and open-sourced his methodology as an [Rmarkdown document](https://buzzfeednews.github.io/2018-01-trump-state-of-the-union/).   
 
@@ -93,7 +99,7 @@ FiveThirtyEight used sentiment analysis to help [contrast presidential inaugurat
 
 ![img](img/538-positive-inauguraladdresses.png)
 
-### Sentiment analysis in finance
+## Sentiment analysis in finance
 
 Bloomberg routinely analyzes Twitter sentiment surrounding keywords, companies and entities, [such as this 2017 Vodaphone analysis](https://www.bloomberg.com/professional/blog/twitter-trade-profits-vodafone-courts-idea-cellular-india/), to better inform the trading strategies of its clients.
 
@@ -103,7 +109,7 @@ J.P. Morgan [has published about sentiment analysis](https://www.jpmorgan.com/gl
 
 ![img](img/jpmorgan.png)
 
-### Text mining on craft beer data
+## Text mining on craft beer data
 
 The community of tidytext users is large and very open to sharing code. Here are some examples of informal text mining and sentiment analyses that have been popoular on the Internet. One looked at [craft beer reviews](https://www.kaylinpavlik.com/tidy-text-beer/), 
 
@@ -111,7 +117,7 @@ The community of tidytext users is large and very open to sharing code. Here are
 
 ![img](img/harrypotter.png)
 
-# Q&A 
+## Q&A 
 
 What real-world text analysis projects stuck out to you as memorable? Why? What was harder to get your head around and why? 
 
@@ -256,3 +262,5 @@ trigram_counts
 
 # Sentiment analysis methods
 
+
+# Visualization and communication
