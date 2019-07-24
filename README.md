@@ -218,7 +218,6 @@ head(trump_counts, n=15)
 #write.csv(trump_counts, "trump_counts.csv") # write to csv
 ```
 
-
 Ok, moving on to bigrams. Let's use unnest_token()'s "token" and "n" arguments. Then we'll count the bigrams and view them with head(). 
 
 ```{r}
@@ -274,7 +273,9 @@ trigram_counts <- trigrams_filtered %>%
 trigram_counts 
 ```
 
-**Question:** How would you summarize these results for a non-technical audience? Could you design a top 10 table with your exported CSV in Excel and embed it alongside your code? What would your headline be for this State of the Union speech in particular?  
+**Question 1:** How would you summarize these results for a non-technical audience? Could you design a top 10 table with your exported CSV and embed it alongside your code? 
+
+**Question 2:** What would your headline be for this 2018 State of the Union speech, based on these n-grams, bigrams and/or trigrams?  
 
 
 ## Doing string calculations
@@ -305,6 +306,8 @@ ggplot(length_of_sous, aes(date, length)) +
   geom_point()
 ```
 
+![img](img/sotu-length.png)
+
 We can also create something akin to the Google n-gram viewer by "searching" through the speeches using "str_count" and calculating the number of times a specific keyword or phrase appears. We can then plot the output as a line chart. 
 
 ```{r}
@@ -318,6 +321,9 @@ speeches_w_keyword
 ggplot(speeches_w_keyword, aes(date,count)) +
   geom_line(stat="identity")
 ```
+
+![img](img/healthcare-search.png)
+
 
 ## Q&A
 **Question 1:** Take a look at this helpful stringr cheat sheet [here](https://github.com/rstudio/cheatsheets/raw/master/strings.pdf) or below. What other string-based questions might you want to ask this dataset? 
@@ -382,6 +388,9 @@ ggplot(sentiment_by_president, aes(reorder(president, avgscore), avgscore)) +
   coord_flip()
 ```
 
+![img](img/sentpresident.png)
+
+
 **Question:** Do you have any idea why a particular president is in a particular spot? Why might FDR, for example, be near the bottom? 
 
 Let's now look at the sentiment of State of the Union speeches over time. Instead of organizing by president, we can group_by() message and date. Plotting that as a scatterplot and fitting a linear regression to the data, we see that the speeches appear to be relatively stable, in terms of sentiment, across time.
@@ -396,6 +405,9 @@ ggplot(sentiment_sou_afinn, aes(date, avgscore)) +
   geom_point() + 
   geom_smooth(method="lm")
 ```
+
+![img](img/sentiment_sou_afinn.png)
+
 
 **Question:** What other insights might you want to communicate alongside this chart? 
 
