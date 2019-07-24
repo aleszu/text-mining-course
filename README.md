@@ -85,7 +85,7 @@ The Boston Globe's [Arresting Words investigation](https://apps.bostonglobe.com/
 
 ## Text analysis in marketing 
 
-Crimson Hexagon, recently acquired by Brandwatch, delivers "actionable social insights for the enterprise," i.e. how is Under Armour clothing or Shock Top beer [being discussed online](https://www.slideshare.net/liberateyourbrand/crimson-hexagon-10-2030)? 
+Crimson Hexagon, recently acquired by Brandwatch, delivers "actionable social insights for the enterprise," i.e. how is Under Armour clothing or 5-hour Energy Drink [being discussed online](https://www.slideshare.net/liberateyourbrand/crimson-hexagon-10-2030)? 
 
 ![img](img/crimson-hexagon-underarmour.jpg)
 ![img](img/crimson-hexagon.png)
