@@ -3,9 +3,9 @@ Aleszu Bajak
 
 1. [Outline](#outline)
 2. [Text analysis in the wild](#text-analysis-in-the-wild)
-3. [Text analysis methods](text-analysis-methods)
-4. [Sentiment analysis methods](sentiment-analysis-methods)
-5. [Visualization and communication](visualization-and-communication)
+3. [Text analysis methods](#text-analysis-methods)
+4. [Sentiment analysis methods](#sentiment-analysis-methods)
+5. [Visualization and communication](#visualization-and-communication)
 
 This O'Reilly course will introduce participants to the techniques and applications of **text mining and sentiment analysis** by training them in easy-to-use open-source tools and scalable, replicable methodologies that will make them stronger data scientists and more thoughtful communicators. 
 
