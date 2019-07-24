@@ -398,11 +398,71 @@ ggplot(sentiment_sou_afinn, aes(date, avgscore)) +
 **Question:** What other insights might you want to communicate alongside this chart? 
 
 
-# Activity 
+## Activity 
 
 You have the "labMT" dictionary. Swap it in for "afinn" in the inner_join() function and try to recreate the scatterplot with the labMT-scored speeches. 
 
 **Question:** What difference do you notice when the speeches are scored with the labMT dictionary?  
+
+
+## Applying sentiment analysis to social media
+
+Now, let's recreate the sentiment analysis my graduate student Floris Wu and I performed for [Roll Call on Senate candidate tweets](https://www.rollcall.com/news/campaigns/lead-midterms-twitter-republicans-went-high-democrats-went-low) in the lead-up to the 2018 midterms. 
+
+![img](img/rollcall1.png)
+
+First, let's pull in the tweets, which were gathered using the [rtweet package](https://rtweet.info/). Full methodology is published at the bottom of the [Roll Call article]((https://www.rollcall.com/news/campaigns/lead-midterms-twitter-republicans-went-high-democrats-went-low)). We also added some extra columns including party affiliation and share of the vote won in the 2018 elections. This information is all in the alltweets.zip file. 
+
+Let's do some exploratory data visualization and create a histogram using ggplot2. We can add custom colors and change the theme with a couple extra lines: 
+
+```{r}
+candidate_tweets <- read_csv("alltweets.zip")
+glimpse(candidate_tweets)
+
+ggplot(candidate_tweets, aes(date, fill=party)) + 
+  geom_histogram(stat = "count") +
+  ylim(0, 500) +
+  scale_fill_manual(values=c("#404f7c", "forestgreen", "#c63b3b")) +
+  theme_minimal() 
+```
+
+Next, we tokenize and score the tweets with the labMT dictionary. Important: We need to group_by() tweet to get average sentiment of the overall tweet. 
+
+```{r}
+tokenized_tweets <- candidate_tweets %>%
+  unnest_tokens(word, text) %>%
+  anti_join(stop_words) %>%
+  glimpse()
+
+all_sentiment <- tokenized_tweets %>%  
+  inner_join(labMT, by = "word") %>%
+  group_by(tweet, name, party, followers_count, percent_of_vote) %>%  
+  summarise(sentiment = mean(score)) %>% 
+  arrange(desc(sentiment))  %>%
+  glimpse()
+```
+
+Next, we create a pivot table that calculates the average score per candidate and plot that as a scatterplot with custom colors, a custom scale range for the points (whose size is mapped to the candidate's number of followers), and trend lines for each party. Your graphic should look very similar to the final visual that appeared with the article. 
+
+```{r}
+final_pivot <- all_sentiment %>% 
+  group_by(name, party, followers_count, percent_of_vote) %>% 
+  summarise(avgscore = mean(sentiment)) %>% 
+  glimpse()
+
+ggplot(final_pivot, aes(y=percent_of_vote, x=avgscore, color=party)) + 
+  geom_point(aes(size=followers_count)) + 
+  scale_size(name="", range = c(1.5, 8)) +
+  geom_smooth(method="lm", se = FALSE) + 
+  scale_color_manual(values=c("#404f7c", "#34a35c", "#34a35c", "#c63b3b")) +
+  ggtitle("") +
+  xlab("Average sentiment of tweets")+
+  ylab("Percent of vote in 2018 midterms")+
+  theme_minimal()
+```
+
+**Question:** What caveats would you include in the methodology you were publishing with this kind of social media sentiment analysis? What tweet-level data would you want to inspect and mention that speaks to the shortcomings of these methods? 
+
 
 
 # Visualization and communication
