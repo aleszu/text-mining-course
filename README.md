@@ -112,14 +112,16 @@ FiveThirtyEight used sentiment analysis to help [contrast presidential inaugurat
 
 Bloomberg routinely analyzes Twitter sentiment surrounding keywords, companies and entities, [such as this 2017 Vodaphone analysis](https://www.bloomberg.com/professional/blog/twitter-trade-profits-vodafone-courts-idea-cellular-india/), to better inform the trading strategies of its clients.
 
+
 ![img](img/bloomberg.png)
+
 
 J.P. Morgan [has published about sentiment analysis](https://www.jpmorgan.com/global/research/machine-learning) it has applied to analyst reports and news articles to assess the relationship between stock trades and news sentiment.
 
 ![img](img/jpmorgan.png)
 
 
-## Text mining on craft beer data
+## Text mining for fun
 
 The community of tidytext users is large and very open to sharing code. Here are some examples of informal text mining and sentiment analyses that have been popoular on the Internet: [craft beer reviews](https://www.kaylinpavlik.com/tidy-text-beer/) and [Harry Potter books](https://cfss.uchicago.edu/notes/harry-potter-exercise/).
 
