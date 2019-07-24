@@ -347,7 +347,21 @@ labMT<- read.csv("labMT.csv")
 labMT
 ```
 
-Let's use the afinn dictionary to score the State of the Union speeches. The following code will use inner_join() to merge in the afinn word/score dictionary and leave only those words that have been scored. Next, we can create a pivot table that summarizes the average sentiment score by president. Finally, we'll plot the results as a bar chart. 
+Let's score the sentiment of a very simple sentence using the afinn dictionary. We'll ingest the sentence, tidy it, tokenize it and then use inner_join() to merge in the afinn word/score dictionary and leave only those words that have been scored. Finally, we'll calculate the average score of the five words that were scored. (Notice that we started out with 10 words.)
+
+```{r}
+alexander <- c("Alexander and the terrible, horrible, no good, very bad day")
+alexander <- as.tibble(alexander) 
+
+alexander_scored <- alexander %>%
+  unnest_tokens(word, value) %>%
+  inner_join(afinn, by="word") %>% 
+  glimpse()
+
+mean(alexander_scored$score)
+```
+
+Ok, let's go to a bigger dataset: the State of the Union speeches. Let's merge in the afinn dictionary and then create a pivot table that summarizes the average sentiment score by president. Finally, we'll plot the results as a bar chart. 
 
 ```{r}
 sentiment_sou <- sou %>%
@@ -358,7 +372,8 @@ glimpse(sentiment_sou)
 sentiment_by_president <- sentiment_sou %>%
   group_by(president) %>% 
   summarise(avgscore = mean(score)) %>%
-  arrange(desc(avgscore))
+  arrange(desc(avgscore)) %>%
+  glimpse()
 
 ggplot(sentiment_by_president, aes(reorder(president, avgscore), avgscore)) +
   geom_col() +
@@ -381,6 +396,7 @@ ggplot(sentiment_sou_afinn, aes(date, avgscore)) +
 ```
 
 **Question:** What other insights might you want to communicate alongside this chart? 
+
 
 # Activity 
 
