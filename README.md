@@ -343,8 +343,7 @@ bing
 nrc <- get_sentiments("nrc")
 nrc
 
-labMT<- read.csv("https://raw.githubusercontent.com/aleszu/textanalysis-shiny/master/labMT2english.csv", sep="\t")
-labMT <- as.tibble(labMT)
+labMT<- read.csv("labMT.csv")
 labMT
 ```
 
