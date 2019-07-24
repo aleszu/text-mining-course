@@ -482,8 +482,7 @@ ggplot(final_pivot, aes(y=percent_of_vote, x=avgscore, color=party)) +
 
 ![img](img/final-rollcall.png)
 
-**Question:** What caveats would you include in the methodology you were publishing with this kind of social media sentiment analysis? What tweet-level data would you want to inspect and mention that speaks to the shortcomings of these methods? 
-
+**Question:** What caveats would you include if you were publishing with this kind of social media sentiment analysis? What tweet-level data would you want to inspect and mention that speaks to the shortcomings of these methods? 
 
 
 # Visualization and communication
