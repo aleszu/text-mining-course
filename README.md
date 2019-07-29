@@ -50,7 +50,7 @@ This course can also be accessed on **RStudio Cloud** [here](TKTKTKKT).
 
 - [Trump's 2018 State of the Union speeches](https://github.com/aleszu/text-mining-course/blob/master/trump2018.txt) 
 - [U.S. State of the Union speeches](https://github.com/aleszu/text-mining-course/blob/master/sou.csv)
-- [Trump tweets in July 2019](https://github.com/aleszu/text-mining-course/blob/master/Trump-tweets.csv)
+- [Trump tweets from July 2019](https://github.com/aleszu/text-mining-course/blob/master/Trump_tweets.csv)
 - [Wine reviews from WineEnthusiast.com](https://github.com/aleszu/text-mining-course/blob/master/wine-reviews.zip)
 - [Tweets by U.S. Senate candidates through 2018](https://github.com/aleszu/text-mining-course/blob/master/alltweets.zip)
 
