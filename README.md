@@ -487,6 +487,38 @@ ggplot(final_pivot, aes(y=percent_of_vote, x=avgscore, color=party)) +
 **Question:** What caveats would you include if you were publishing with this kind of social media sentiment analysis? What tweet-level data would you want to inspect and mention that speaks to the shortcomings of these methods? 
 
 
+## Parts-of-speech analysis
+
+Let's look at the grammar Trump is using on Twitter. 
+
+```{r}
+Trump <- read_csv("Trump_tweets.csv")
+glimpse(Trump)
+
+Trump_tokenized_pos <- Trump %>%
+  unnest_tokens(word, text) %>% # tokenize the headlines
+  anti_join(stop_words) %>%
+  inner_join(parts_of_speech) # join parts of speech dictionary
+
+Trump_tokenized_pos %>% 
+  glimpse() 
+
+Trump_adj <- Trump_tokenized_pos %>%
+  group_by(word) %>% 
+  filter(pos == "Adjective") %>% 
+  count(word, sort = TRUE) %>%
+  inner_join(labMT, by="word") %>% 
+  glimpse()
+
+ggplot(Trump_adj, aes(n, score, color = score>5)) +
+  geom_text(aes(label=word), check_overlap = TRUE) +
+  theme_minimal() +
+  scale_color_manual(values=c("#c63b3b", "#404f7c")) +
+  theme(legend.position = "none")
+```
+
+
+
 # Visualization and communication
 
 ## Tips for simple and effective communication
