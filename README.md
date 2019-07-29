@@ -357,7 +357,7 @@ labMT<- read.csv("labMT.csv")
 labMT
 ```
 
-Let's score the sentiment of a very simple sentence using the afinn dictionary. We'll ingest the sentence, tidy it, tokenize it and then use inner_join() to merge in the afinn word/score dictionary and leave only those words that have been scored. Finally, we'll calculate the average score of the five words that were scored. (Notice that we started out with 10 words.)
+Let's score the sentiment of a very simple sentence using the [afinn dictionary](https://arxiv.org/abs/1103.2903). We'll ingest the sentence, tidy it, tokenize it and then use inner_join() to merge in the afinn word/score dictionary and leave only those words that have been scored. Finally, we'll calculate the average score of the five words that were scored. (Notice that we started out with 10 words.)
 
 ```{r}
 alexander <- c("Alexander and the terrible, horrible, no good, very bad day")
