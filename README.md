@@ -491,7 +491,7 @@ ggplot(final_pivot, aes(y=percent_of_vote, x=avgscore, color=party)) +
 Adjectives can drive the tone of a sentence - or a tweet. Let's look at Donald Trump's adjective use on Twitter to illustrate parts-of-speech analysis. We'll also try to visualize the results in a couple different ways. These tweets were collected with R's "retweet" package and some great tutorials can be [found here](https://rtweet.info/). 
 
 ```{r}
-Trump <- read_csv("Trump_tweets.csv")
+Trump <- read_csv("https://raw.githubusercontent.com/aleszu/text-mining-course/master/Trump_tweets.csv")
 glimpse(Trump)
 
 Trump_tokenized_pos <- Trump %>%
@@ -499,17 +499,30 @@ Trump_tokenized_pos <- Trump %>%
   anti_join(stop_words) %>%
   inner_join(parts_of_speech) # join parts of speech dictionary
 
-Trump_tokenized_pos %>% 
-  glimpse() 
+glimpse(Trump_tokenized_pos)
 
 Trump_adj <- Trump_tokenized_pos %>%
   group_by(word) %>% 
-  filter(pos == "Adjective") %>% 
-  count(word, sort = TRUE) %>%
-  inner_join(labMT, by="word") %>% 
+  filter(pos == "Adjective") %>%  # filter for adjectives
+  count(word, sort = TRUE) %>% 
   glimpse()
 
-ggplot(Trump_adj, aes(n, score, color = score>5)) +
+head(Trump_adj, n=10)
+
+ggplot(head(Trump_adj, n=10), aes(reorder(word, n), n)) +
+  geom_bar(stat = "identity") +
+  theme_minimal() +
+  xlab("")+ 
+  coord_flip()
+
+Trump_adj_sent <- Trump_tokenized_pos %>%
+  group_by(word) %>% 
+  filter(pos == "Adjective") %>% 
+  count(word, sort = TRUE) %>%
+  inner_join(labMT, by="word") %>%  # add in sentiment 
+  glimpse()
+
+ggplot(Trump_adj_sent, aes(n, score, color = score>5)) +
   geom_text(aes(label=word), check_overlap = TRUE) +
   theme_minimal() +
   scale_color_manual(values=c("#c63b3b", "#404f7c")) +
