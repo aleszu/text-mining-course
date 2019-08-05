@@ -251,7 +251,7 @@ bigram_counts <- bigrams_filtered %>%
 bigram_counts 
 ```
 
-Now we see some interesting bigrams like "MS 13," "North Korea" and "immigration system." Trump's still hammering those 2018 talking points today, isn't he? 
+Now we see some interesting bigrams like "MS 13," "North Korea" and "immigration system." 
 
 **Question:** How would you export this table as a CSV? Can you write the function in R? 
 
@@ -336,7 +336,6 @@ ggplot(speeches_w_keyword, aes(date,count)) +
 ![img](img/stringr-cheatsheet.png)
 
 
-
 # Sentiment analysis methods
 
 Sentiment analysis is being widely applied to understand politics, finance or sports, as we saw from our examples analyzing the sentiment of social media from candidates running for Senate, news articles about a particular company or product, and Reddit comments from baseball fans. 
@@ -397,7 +396,6 @@ ggplot(sentiment_by_president, aes(reorder(president, avgscore), avgscore)) +
 **Question 1:** Do you have any idea why a particular president is in a particular spot? Why might FDR, for example, be near the bottom? 
 
 **Question 2:** How would you label the x-axis? What's going to be most clear and who is your intended audience?
-
 
 Let's now look at the sentiment of State of the Union speeches over time. Instead of organizing by president, we can group_by() message and date. Plotting that as a scatterplot and fitting a linear regression to the data, we see that the speeches appear to be relatively stable, in terms of sentiment, across time.
 
@@ -490,7 +488,7 @@ ggplot(final_pivot, aes(y=percent_of_vote, x=avgscore, color=party)) +
 
 ## Parts-of-speech analysis
 
-Let's look at the grammar Trump is using on Twitter. 
+Adjectives can drive the tone of a sentence - or a tweet. Let's look at Donald Trump's adjective use on Twitter to illustrate parts-of-speech analysis. We'll also try to visualize the results in a couple different ways. These tweets were collected with R's "retweet" package and some great tutorials can be [found here](https://rtweet.info/). 
 
 ```{r}
 Trump <- read_csv("Trump_tweets.csv")
