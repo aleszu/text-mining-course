@@ -13,7 +13,7 @@ By the end of this live, hands-on, online course, you’ll understand:
 
 - The techniques and applications of textual analysis
 - How to convert unstructured text from politics, social science, and social media into data 
-- Techniques like **n-gram analysis**, **sentiment analysis**, **hierarchical cluster analysis**, and **parts-of-speech analysis**
+- Techniques like **n-gram analysis**, **sentiment analysis** and **parts-of-speech analysis**
 
 And you’ll be able to:
 
@@ -140,7 +140,7 @@ The community of tidytext users is large and very open to sharing code. Here are
 
 # Text analysis methods
 
-This section will introduce methods for tokenization, n-gram analysis, hierarchical cluster analysis and part-of-speech analysis. We will then conduct a brief text analysis activity to isolate top words, top phrases and top parts of speech for a dataset. 
+This section will introduce methods for tokenization, n-gram analysis and part-of-speech analysis. We will then conduct a brief text analysis activity to isolate top words, top phrases and top parts of speech for a dataset. 
 
 
 ## Tokenization
