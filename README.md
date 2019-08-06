@@ -533,14 +533,33 @@ ggplot(Trump_adj_sent, aes(n, score, color = score>5)) +
 
 # Visualization and communication
 
-## Tips for simple and effective communication
+Data analysis and extracted insights are nothing if they aren't communicated properly and effectively. This section will introduce several tools and formats to help improve your data-driven storytelling.   
+
+## Exporting CSVs
+
+Whenever I reach a stage in my data analysis where I want to save a snapshot of where I am, whether to share with a colleague or to keep to myself, I write my dataframe into a CSV. Setting the "row.names=FALSE" argument to TRUE, which is default, will add a unique number to every row. 
+
+```{r}
+sou <- read_csv("sou.csv")
+write.csv(sou, "state-of-the-union-speeches.csv", row.names=FALSE)
+```
 
 ## Tables 
 
-## Bar charts 
+
 
 ## Wordclouds
 
+
+
 ## Scatterplots and more
+
+In the preceding sections we've created scatterplots, line charts and bar charts. Those were all created with the ggplot2 package, which I highly recommend. Here is some extra formatting and style code that I've found helpful.
+
+```{r}
+
+```
+
+## Tips for simple and effective communication
 
 
