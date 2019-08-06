@@ -282,7 +282,7 @@ trigram_counts
 
 ## Doing string calculations
 
-The stringr package brings together loads of useful tools for string manipulation and calculation. Below, run through the code to see how str_length() can be used to calculate the length of strings. 
+The **stringr** package brings together loads of useful tools for string manipulation and calculation. Below, run through the code to see how str_length() can be used to calculate the length of strings. 
 
 ```{r}
 # Calculate length of strings 
@@ -293,7 +293,7 @@ library(stringr)
 str_length(line) 
 ```
 
-Next, we'll pull in the State of the Union speeches CSV file and create a new object with a new column "length." In this new column, we'll store the length of each speech we calculate with str_length().  Using the ggplot2 package we can plot a scatterplot of date vs. length to visualize the length of the speeches over time.  
+Next, we'll pull in the State of the Union speeches CSV file and create a new object with a new column "length." In this new column, we'll store the length of each speech we calculate with str_length().  Using the **ggplot2** package we can plot a scatterplot of date vs. length to visualize the length of the speeches over time. We'll return to more data visualization with ggplot2 soon. 
 
 ```{r}
 sou <- read_csv("sou.csv")
@@ -326,23 +326,29 @@ ggplot(speeches_w_keyword, aes(date,count)) +
 
 ![img](img/healthcare-search.png)
 
-**Question:** Could you imagine an interactive app that allows users to search a dataset for specific keywords? Shiny apps in R can be built to do this. See [this prototype of mine](https://github.com/aleszu/textanalysis-shiny) and this [documentation on Shiny apps](https://shiny.rstudio.com/) from RStudio.  
+**Question:** Could you imagine an interactive app that allows users to search a dataset for specific keywords? What dataset would you use? What would the user interface look like? Shiny apps in R can be built to do this. See [this prototype of mine](https://github.com/aleszu/textanalysis-shiny) and this [documentation on Shiny apps](https://shiny.rstudio.com/) from RStudio.  
 
 
 ## Parts-of-speech analysis
 
-Adjectives can drive the tone of a sentence. Or a tweet. 
+Adjectives can drive the tone of a sentence. Or a tweet. That's where parts-of-speech analysis comes in. 
 
-Let's look at Donald Trump's adjective use on Twitter to illustrate parts-of-speech analysis. We'll also try to visualize the results in a couple different ways. These tweets were collected with R's "retweet" package and some great tutorials can be [found here](https://rtweet.info/). 
+Let's look at Donald Trump's adjective use on Twitter to illustrate the mechanics of parts-of-speech analysis. We'll also try to visualize the results in a couple different ways. These tweets were collected with R's "retweet" package and some great tutorials can be [found here](https://rtweet.info/). 
+
+First, we'll pull in the dataset of tweets collected for the month of July, 2019. Then we'll tokenize and remove stop words. The very next operation uses inner_join() to merge in the "parts_of_speech" dataset, which comes with **tidytext** and includes more than 208,000 word/pos combinations. 
+
+What remains are the words from Trump's tweets that can be tagged with a specific part of speech. If we isolate adjectives, we can glimpse() the results and plot them as a bar chart.    
 
 ```{r}
-Trump <- read_csv("https://raw.githubusercontent.com/aleszu/text-mining-course/master/Trump_tweets.csv")
+Trump <- read_csv("Trump_tweets.csv")
 glimpse(Trump)
 
 Trump_tokenized_pos <- Trump %>%
   unnest_tokens(word, text) %>% # tokenize the headlines
   anti_join(stop_words) %>%
   inner_join(parts_of_speech) # join parts of speech dictionary
+
+parts_of_speech
 
 glimpse(Trump_tokenized_pos)
 
@@ -363,8 +369,6 @@ ggplot(head(Trump_adj, n=10), aes(reorder(word, n), n)) +
 
 ## Q&A
 **Question:**  Based on the n-gram analysis, string-based calculations and parts-of-speech analysis we've performed, what other questions could you come up with for the State of the Union speeches, a politician's tweets or another dataset might you want to compile for one of the methodologies practices above?
-
-
 
 
 # Sentiment analysis methods
@@ -388,7 +392,7 @@ labMT<- read.csv("labMT.csv")
 labMT
 ```
 
-Let's score the sentiment of a very simple sentence using the [afinn dictionary](https://arxiv.org/abs/1103.2903). We'll ingest the sentence, tidy it, tokenize it and then use inner_join() to merge in the afinn word/score dictionary and leave only those words that have been scored. Finally, we'll calculate the average score of the five words that were scored. (Notice that we started out with 10 words.)
+Let's score the sentiment of a very simple sentence using the [afinn dictionary](https://arxiv.org/abs/1103.2903). We'll ingest the sentence, tidy it, tokenize it and then use inner_join() to merge in the afinn word/score dictionary and leave only those words that have been scored. Finally, we'll calculate the average score of the five words that were scored. (Notice that we started out with 10 words.) 
 
 ```{r}
 alexander <- c("Alexander and the terrible, horrible, no good, very bad day")
@@ -402,7 +406,7 @@ alexander_scored <- alexander %>%
 mean(alexander_scored$score)
 ```
 
-Ok, let's go to a bigger dataset: the State of the Union speeches. Let's merge in the afinn dictionary and then create a pivot table that summarizes the average sentiment score by president. Finally, we'll plot the results as a bar chart. 
+Ok, let's go to a bigger dataset and do this at scale: the State of the Union speeches. Let's merge in the afinn dictionary and then create a pivot table that summarizes the average sentiment score by president using the mean() function embedded in the summarise() function. Finally, we'll plot the results as a bar chart. 
 
 ```{r}
 sentiment_sou <- sou %>%
@@ -428,6 +432,7 @@ ggplot(sentiment_by_president, aes(reorder(president, avgscore), avgscore)) +
 
 **Question 2:** How would you label the x-axis? What's going to be most clear and who is your intended audience?
 
+
 Let's now look at the sentiment of State of the Union speeches over time. Instead of organizing by president, we can group_by() message and date. Plotting that as a scatterplot and fitting a linear regression to the data, we see that the speeches appear to be relatively stable, in terms of sentiment, across time.
 
 ```{r}
@@ -444,17 +449,17 @@ ggplot(sentiment_sou_afinn, aes(date, avgscore)) +
 ![img](img/sentiment_sou_afinn.png)
 
 
-**Question:** What other insights might you want to communicate alongside this chart? 
+**Question:** What labels or other insights might you want to communicate along with this chart? 
 
 
 ## Activity 
 
-You have the "labMT" dictionary. Swap it in for "afinn" in the inner_join() function and try to recreate the scatterplot with the labMT-scored speeches. 
+You have the "labMT" dictionary. Swap it in for "afinn" in the inner_join() function and recreate the scatterplot with labMT-scored speeches. 
 
-**Question:** What difference do you notice when the speeches are scored with the labMT dictionary?  
+**Question:** What difference do you notice when the speeches are scored with the labMT dictionary? 
 
 
-## Applying sentiment analysis to social media
+## Bonus: Applying sentiment analysis to social media
 
 Now, let's recreate the sentiment analysis my graduate student Floris Wu and I performed for [Roll Call on Senate candidate tweets](https://www.rollcall.com/news/campaigns/lead-midterms-twitter-republicans-went-high-democrats-went-low) in the lead-up to the 2018 midterms. 
 
@@ -505,10 +510,12 @@ ggplot(final_pivot, aes(y=percent_of_vote, x=avgscore, color=party)) +
   geom_point(aes(size=followers_count)) + 
   scale_size(name="", range = c(1.5, 8)) +
   geom_smooth(method="lm", se = FALSE) + 
+  labs(title = "As they go low... we go lower?",
+       subtitle = "Democrats with more negative tweets won more often in 2018",
+       caption = "Source: Twitter") +
   scale_color_manual(values=c("#404f7c", "#34a35c", "#34a35c", "#c63b3b")) +
-  ggtitle("") +
-  xlab("Average sentiment of tweets")+
-  ylab("Percent of vote in 2018 midterms")+
+  xlab("Average sentiment of tweets") +
+  ylab("Percent of vote in 2018 midterms") +
   theme_minimal()
 ```
 
@@ -517,10 +524,9 @@ ggplot(final_pivot, aes(y=percent_of_vote, x=avgscore, color=party)) +
 **Question:** What caveats would you include if you were publishing with this kind of social media sentiment analysis? What tweet-level data would you want to inspect and mention that speaks to the shortcomings of these methods? 
 
 
-
 # Visualization and communication
 
-Data analysis and extracted insights are nothing if they aren't communicated properly and effectively. This section will introduce several tools and formats to help improve your data-driven storytelling.   
+Data analysis and extracted insights are nothing if they aren't communicated effectively. This section will introduce several tools and formats to help improve your data-driven storytelling.   
 
 ## Exporting CSVs
 
