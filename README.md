@@ -24,9 +24,9 @@ And you’ll be able to:
 
 # Requirements and accessing data
 
-Ideally, participants will have the **latest versions of R and RStudio** and the **tidytext** and **tidyverse**. To access all R scripts, participants should next download [this Github repository](https://github.com/aleszu/text-mining-course) and set it as their working directory in RStudio using setwd(). 
+Ideally, participants will have the **latest versions of R and RStudio** and the **tidytext** and **tidyverse** packages. To access all R scripts, participants should next download [this Github repository](https://github.com/aleszu/text-mining-course) and set it as their working directory in RStudio. 
 
-This course can also be accessed on **RStudio Cloud** [here](https://rstudio.cloud/project/434664).
+This course can also be accessed on **RStudio Cloud** [here](https://rstudio.cloud/project/434664), though a free account is required.
 
 
 # Table of contents
@@ -113,7 +113,6 @@ FiveThirtyEight used sentiment analysis to help [contrast presidential inaugurat
 
 Bloomberg routinely analyzes Twitter sentiment surrounding keywords, companies and entities, [such as this 2017 Vodaphone analysis](https://www.bloomberg.com/professional/blog/twitter-trade-profits-vodafone-courts-idea-cellular-india/), to better inform the trading strategies of its clients.
 
-
 ![img](img/bloomberg.png)
 
 
@@ -135,12 +134,12 @@ The community of tidytext users is large and very open to sharing code. Here are
 
 **Question 1:** What real-world text analysis projects stuck out to you as memorable? Why? What was harder to get your head around and why? 
 
-**Question 2:** Choose one of the projects and write out some potential caveats, assumptions and/or problems faced with data collection, analysis or communication. Share via the group chat. 
+**Question 2:** Choose one of the [projects presented](https://github.com/aleszu/text-mining-course/) and write out some potential caveats, assumptions and/or problems faced with data collection, analysis or communication. Share via the group chat. 
 
 
 # Text analysis methods
 
-This section will introduce methods for tokenization, n-gram analysis and part-of-speech analysis. We will then conduct a brief text analysis activity to isolate top words, top phrases and top parts of speech for a dataset. 
+This section will introduce methods for tokenization, n-gram analysis and parts-of-speech analysis. We will then conduct a brief text analysis activity to isolate top words, top phrases and top parts of speech for a dataset. 
 
 
 ## Tokenization
@@ -255,6 +254,7 @@ Now we see some interesting bigrams like "MS 13," "North Korea" and "immigration
 
 **Question:** How would you export this table as a CSV? Can you write the function in R? 
 
+
 Finally, let's change the "n" argument to "3" and count the trigrams.
 
 ```{r}
@@ -327,13 +327,45 @@ ggplot(speeches_w_keyword, aes(date,count)) +
 
 ![img](img/healthcare-search.png)
 
+**Question:** Could you imagine an interactive app that allows users to search a dataset for specific keywords? Shiny apps in R can be built to do this. See [this prototype of mine](https://github.com/aleszu/textanalysis-shiny) and this [documentation on Shiny apps](https://shiny.rstudio.com/) from RStudio.  
+
+
+## Parts-of-speech analysis
+
+Adjectives can drive the tone of a sentence. Or a tweet. 
+
+Let's look at Donald Trump's adjective use on Twitter to illustrate parts-of-speech analysis. We'll also try to visualize the results in a couple different ways. These tweets were collected with R's "retweet" package and some great tutorials can be [found here](https://rtweet.info/). 
+
+```{r}
+Trump <- read_csv("https://raw.githubusercontent.com/aleszu/text-mining-course/master/Trump_tweets.csv")
+glimpse(Trump)
+
+Trump_tokenized_pos <- Trump %>%
+  unnest_tokens(word, text) %>% # tokenize the headlines
+  anti_join(stop_words) %>%
+  inner_join(parts_of_speech) # join parts of speech dictionary
+
+glimpse(Trump_tokenized_pos)
+
+Trump_adj <- Trump_tokenized_pos %>%
+  group_by(word) %>% 
+  filter(pos == "Adjective") %>%  # filter for adjectives
+  count(word, sort = TRUE) %>% 
+  glimpse()
+
+head(Trump_adj, n=10)
+
+ggplot(head(Trump_adj, n=10), aes(reorder(word, n), n)) +
+  geom_bar(stat = "identity") +
+  theme_minimal() +
+  xlab("")+ 
+  coord_flip()
+```
 
 ## Q&A
-**Question 1:** Take a look at this helpful stringr cheat sheet [here](https://github.com/rstudio/cheatsheets/raw/master/strings.pdf) or below. What other string-based questions might you want to ask this dataset? 
+**Question:**  Based on the n-gram analysis, string-based calculations and parts-of-speech analysis we've performed, what other questions could you come up with for the State of the Union speeches, a politician's tweets or another dataset might you want to compile for one of the methodologies practices above?
 
-**Question 2:** Based on the n-gram analysis and string-based calculations we've performed, what other questions could you come up with for the State of the Union speeches or what other dataset might you want to compile for one of the methodologies practices above?
 
-![img](img/stringr-cheatsheet.png)
 
 
 # Sentiment analysis methods
@@ -429,7 +461,7 @@ Now, let's recreate the sentiment analysis my graduate student Floris Wu and I p
 
 ![img](img/rollcall1.png)
 
-First, let's pull in the tweets, which were gathered using the [rtweet package](https://rtweet.info/). Full methodology is published at the bottom of the [Roll Call article]((https://www.rollcall.com/news/campaigns/lead-midterms-twitter-republicans-went-high-democrats-went-low)). We also added some extra columns including party affiliation and share of the vote won in the 2018 elections. This information is all in the alltweets.zip file. 
+First, let's pull in the tweets, which were gathered using the [rtweet package](https://rtweet.info/). Full methodology is published at the bottom of the [Roll Call article](https://www.rollcall.com/news/campaigns/lead-midterms-twitter-republicans-went-high-democrats-went-low) and on my [Github account](https://github.com/aleszu/rollcall-analysis). For the purposes of this activity, I've added some extra columns including party affiliation and share of the vote won in the 2018 elections. This information is all in the alltweets.zip file. 
 
 Let's do some exploratory data visualization and create a histogram using ggplot2. We can add custom colors and change the theme with a couple extra lines: 
 
@@ -484,50 +516,6 @@ ggplot(final_pivot, aes(y=percent_of_vote, x=avgscore, color=party)) +
 ![img](img/final-rollcall.png)
 
 **Question:** What caveats would you include if you were publishing with this kind of social media sentiment analysis? What tweet-level data would you want to inspect and mention that speaks to the shortcomings of these methods? 
-
-
-## Parts-of-speech analysis
-
-Adjectives can drive the tone of a sentence - or a tweet. Let's look at Donald Trump's adjective use on Twitter to illustrate parts-of-speech analysis. We'll also try to visualize the results in a couple different ways. These tweets were collected with R's "retweet" package and some great tutorials can be [found here](https://rtweet.info/). 
-
-```{r}
-Trump <- read_csv("https://raw.githubusercontent.com/aleszu/text-mining-course/master/Trump_tweets.csv")
-glimpse(Trump)
-
-Trump_tokenized_pos <- Trump %>%
-  unnest_tokens(word, text) %>% # tokenize the headlines
-  anti_join(stop_words) %>%
-  inner_join(parts_of_speech) # join parts of speech dictionary
-
-glimpse(Trump_tokenized_pos)
-
-Trump_adj <- Trump_tokenized_pos %>%
-  group_by(word) %>% 
-  filter(pos == "Adjective") %>%  # filter for adjectives
-  count(word, sort = TRUE) %>% 
-  glimpse()
-
-head(Trump_adj, n=10)
-
-ggplot(head(Trump_adj, n=10), aes(reorder(word, n), n)) +
-  geom_bar(stat = "identity") +
-  theme_minimal() +
-  xlab("")+ 
-  coord_flip()
-
-Trump_adj_sent <- Trump_tokenized_pos %>%
-  group_by(word) %>% 
-  filter(pos == "Adjective") %>% 
-  count(word, sort = TRUE) %>%
-  inner_join(labMT, by="word") %>%  # add in sentiment 
-  glimpse()
-
-ggplot(Trump_adj_sent, aes(n, score, color = score>5)) +
-  geom_text(aes(label=word), check_overlap = TRUE) +
-  theme_minimal() +
-  scale_color_manual(values=c("#c63b3b", "#404f7c")) +
-  theme(legend.position = "none")
-```
 
 
 
