@@ -201,7 +201,7 @@ trump_counts <- trump_speech_tbl %>%
 trump_counts # 5,864 words
 ```
 
-We'll next use the count() function we previously introduced.  Wow, that's a lot of *and's, the's* and *to's*. Let's remove the stop words and count the words. 
+We'll next use the count() function we previously introduced.  Wow, that's a lot of *and's, the's* and *to's*. Let's remove the stop words and count the words. You can change the "n=" argument in head() to customize the output. Note: I like to save my progress by writing CSVs of my tables. You can do this with "write.csv(trump_counts, "trump_counts.csv")" 
 
 ```{r}
 trump_counts <- trump_speech_tbl %>% 
@@ -217,7 +217,6 @@ trump_counts <- trump_speech_tbl %>%
 
 head(trump_counts)
 head(trump_counts, n=15)
-#write.csv(trump_counts, "trump_counts.csv") # write to csv
 ```
 
 Ok, moving on to bigrams. Let's use unnest_token()'s "token" and "n" arguments. Then we'll count the bigrams and view them with head(). 
