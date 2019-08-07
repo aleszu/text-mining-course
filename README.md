@@ -37,6 +37,7 @@ This course can also be accessed on **RStudio Cloud** [here](https://rstudio.clo
 3. [Text analysis methods](#text-analysis-methods)
 4. [Sentiment analysis methods](#sentiment-analysis-methods)
 5. [Visualization and communication](#visualization-and-communication)
+6. [Final activity](#activity-1)
 
 
 # Course outline
