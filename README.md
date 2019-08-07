@@ -539,11 +539,45 @@ write.csv(sou, "state-of-the-union-speeches.csv", row.names=FALSE)
 
 ## Tables 
 
+Properly formatted and designed for comprehension, tables can go a long way in communicating data, whether that's a ranked list or just a random selection of variables. You can create publication-ready tables in RStudio with packages like **[DT](https://rstudio.github.io/DT/)** and **[formattable](https://www.littlemissdata.com/blog/prettytables)**. Here's a preview of what they look like. 
 
+```{r}
+library(DT)
+datatable(Trump_adj)
+
+library(formattable)
+formattable(Trump_adj,
+            align =c("l","c"))
+            
+formattable(head(Trump_adj, n=15),
+            align =c("l","c"))
+
+formattable(Trump_adj, 
+            align =c("l","r"),
+            list(
+  n = color_bar("lightblue")
+                )
+            )
+```
 
 ## Wordclouds
 
+Although wordclouds have gotten their [fair share of critique](https://www.niemanlab.org/2011/10/word-clouds-considered-harmful/), they can still be powerful. Let's take 
 
+```{r}
+library(ggwordcloud)
+
+ggplot(head(french_word_counts, n=50), aes(label = word, 
+                                           size=n, 
+                                           colors = c("#E69F00"))) +
+  geom_text_wordcloud() +
+  scale_size_area(max_size = 14) +
+  theme_minimal()
+
+ggwordcloud(french_word_counts$word, french_word_counts$n, 
+            min.freq = 1000, 
+            max.words=50)
+```
 
 ## Scatterplots and more
 
@@ -555,4 +589,29 @@ In the preceding sections we've created scatterplots, line charts and bar charts
 
 ## Tips for simple and effective communication
 
+
+
+## Activity
+
+For one final activity in text mining, let's explore a dataset of 130,000 wine reviews from WineEnthusiast.com, which I downloaded from [Kaggle](https://www.kaggle.com/zynicide/wine-reviews/downloads/wine-reviews.zip/4). Below, I've ingested the data and filtered for only French wine reviews. Next, I've kept some of the more interesting variables (like points, price, province and variety) and tokenized the reviews and removed stop words. 
+
+You now have 444,000 words organized by price, points, variety and province in France. Your mission is to use one of the methods we've learned in this course to continue analyzing the text of these wine reviews. Take 20 minutes and return to the group chat with an insight from this dataset. If you wish to share one to three bullet points and a visualization through a Google doc, you can access one here. 
+
+**Note**: You can access the document either with your Google Account or anonymously (likely through an Incognito or Private type of browser session). A Google Account is not required. If you choose to authenticate with your Google Account, your username and/or other identifying information could be visible to others.
+
+```{r}
+reviews <- read_csv("wine-reviews.zip")
+glimpse(reviews)
+
+french_reviews <- reviews %>%
+  filter(country == "France") %>% # Filter for only wines from "France"
+  glimpse()
+
+french_reviews_tokenized <- french_reviews %>%
+  select(description, points, price, province, variety) %>% # keep the columns we want
+  unnest_tokens(word, description) %>% # tokenize the description column
+  anti_join(stop_words)  # remove stopwords 
+
+glimpse(french_reviews_tokenized) 
+```
 
