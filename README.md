@@ -526,7 +526,8 @@ ggplot(final_pivot, aes(y=percent_of_vote, x=avgscore, color=party)) +
 
 # Visualization and communication
 
-Data analysis and extracted insights are nothing if they aren't communicated effectively. This section will introduce several tools and formats to help improve your data-driven storytelling.   
+Data analysis and extracted insights are nothing if they aren't communicated effectively. This section will introduce several visual formats to help improve your data-driven storytelling. 
+
 
 ## Exporting CSVs
 
@@ -562,33 +563,99 @@ formattable(Trump_adj,
 
 ## Wordclouds
 
-Although wordclouds have gotten their [fair share of critique](https://www.niemanlab.org/2011/10/word-clouds-considered-harmful/), they can still be powerful. Let's take 
+Although wordclouds have gotten their [fair share of critique](https://www.niemanlab.org/2011/10/word-clouds-considered-harmful/), they can still be powerful. I like the **ggwordcloud** package because it allows a lot of customization, see [here](https://cran.r-project.org/web/packages/ggwordcloud/vignettes/ggwordcloud.html) and [here](https://rdrr.io/cran/ggwordcloud/man/ggwordcloud.html) for more documentation. 
+
+Let's take the State of the Union addresses and filter for Barack Obama's most frequently used words. Then we'll build two different wordclouds. 
 
 ```{r}
 library(ggwordcloud)
 
-ggplot(head(french_word_counts, n=50), aes(label = word, 
-                                           size=n, 
-                                           colors = c("#E69F00"))) +
+sou <- read_csv("sou.csv")
+glimpse(sou)
+
+sou_words_by_president <- sou %>%
+  unnest_tokens(word, text) %>%
+  anti_join(stop_words) %>%
+  count(word, president, sort=TRUE)
+
+glimpse(sou_words_by_president)
+
+Obama_words <- sou_words_by_president %>%
+  filter(president == "Barack Obama") %>%
+  glimpse()
+
+ggplot(head(Obama_words, n=25), aes(label = word, 
+                                           size=n)) +
   geom_text_wordcloud() +
   scale_size_area(max_size = 14) +
   theme_minimal()
 
-ggwordcloud(french_word_counts$word, french_word_counts$n, 
-            min.freq = 1000, 
+ggwordcloud(Obama_words$word, Obama_words$n, 
+            min.freq = 10, 
             max.words=50)
 ```
 
 ## Scatterplots and more
 
-In the preceding sections we've created scatterplots, line charts and bar charts. Those were all created with the ggplot2 package, which I highly recommend. Here is some extra formatting and style code that I've found helpful.
+In the preceding sections we've created scatterplots, line charts and bar charts. Those were all created with the **ggplot2** package. Let's refresh our memory about the code needed to build a bar chart and a scatterplot. 
+
+Remember we can customize the axis labels, titles, captions and subtitles in ggplot2. For tips on changing the color scheme, read through [this documentation](https://ggplot2.tidyverse.org/reference/scale_manual.html) and know that a little Googling goes a long way for troubleshooting your visualizations in R. 
+
+**Tip**: [hrbrthemes](https://github.com/hrbrmstr/hrbrthemes) is a great package with several very nice built-in themes. Other packages exist to mimick [FiveThirtyEight](https://rdrr.io/cran/ggthemes/man/theme_fivethirtyeight.html) and [The Economist](https://www.ggplot2-exts.org/ggthemes.html). I'm a big fan of the BBC's [R cookbook](https://bbc.github.io/rcookbook/) which walks users through creating BBC-style graphics.   
 
 ```{r}
+# A bar chart
+
+sou <- read_csv("sou.csv")
+
+sent_by_president <- sou %>%
+  unnest_tokens(word, text) %>%
+  inner_join(afinn, by = "word") %>%
+  group_by(president) %>% 
+  summarise(avgscore = mean(score)) %>%
+  arrange(desc(avgscore))
+
+ggplot(sent_by_president, aes(reorder(president, avgscore), avgscore)) +
+  geom_col() +
+  coord_flip()
+
+
+# A scatterplot where text replaces points 
+
+Trump <- read_csv("Trump_tweets.csv")
+
+Trump_adj_sent <- Trump %>%
+  unnest_tokens(word, text) %>% # tokenize the headlines
+  anti_join(stop_words) %>%
+  inner_join(parts_of_speech) %>% # join parts of speech dictionary
+  group_by(word) %>% 
+  filter(pos == "Adjective") %>% 
+  count(word, sort = TRUE) %>%
+  inner_join(labMT, by="word") %>%  # add in sentiment dictionary
+  glimpse()
+
+ggplot(Trump_adj_sent, aes(n, score, color = score>5)) +
+  geom_text(aes(label=word), check_overlap = TRUE) +
+  theme_minimal() +
+  scale_color_manual(values=c("#c63b3b", "#404f7c")) +
+  theme(legend.position = "none")
+   
+   
+# A scatterplot with regression lines and title, subtitle and caption
+
+ggplot(final_pivot, aes(y=percent_of_vote, x=avgscore, color=party)) + 
+  geom_point(aes(size=followers_count)) + 
+  scale_size(name="", range = c(1.5, 8)) +
+  geom_smooth(method="lm", se = FALSE) + 
+  labs(title = "As they go low... we go lower?",
+       subtitle = "Democrats with more negative tweets won more often in 2018",
+       caption = "Source: Twitter") +
+  scale_color_manual(values=c("#404f7c", "#34a35c", "#34a35c", "#c63b3b")) +
+  xlab("Average sentiment of tweets") +
+  ylab("Percent of vote in 2018 midterms") +
+  theme_minimal()
 
 ```
-
-## Tips for simple and effective communication
-
 
 
 ## Activity
