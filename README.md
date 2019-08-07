@@ -662,7 +662,7 @@ ggplot(final_pivot, aes(y=percent_of_vote, x=avgscore, color=party)) +
 
 For one final activity in text mining, let's explore a dataset of 130,000 wine reviews from WineEnthusiast.com, which I downloaded from [Kaggle](https://www.kaggle.com/zynicide/wine-reviews/downloads/wine-reviews.zip/4). Below, I've ingested the data and filtered for only French wine reviews. Next, I've kept some of the more interesting variables (like points, price, province and variety) and tokenized the reviews and removed stop words. 
 
-You now have 444,000 words organized by price, points, variety and province in France. Your mission is to use one of the methods we've learned in this course to continue analyzing the text of these wine reviews. Take 20 minutes and return to the group chat with an insight from this dataset. If you wish to share one to three bullet points and a visualization through a Google doc, you can access one here. 
+You now have 444,000 words organized by price, points, variety and province in France. Your mission is to use one of the methods we've learned in this course to continue analyzing the text of these wine reviews. Take 20 minutes and return to the group chat with an insight from this dataset. If you wish to share one to three bullet points and a visualization through a Google doc, [you can access that here](https://docs.google.com/document/d/1VNy_8jCrNO8Id-YspltyqTtFc0rWz7UnJAX23FHQZr0/edit?usp=sharing). 
 
 **Note**: You can access the document either with your Google Account or anonymously (likely through an Incognito or Private type of browser session). A Google Account is not required. If you choose to authenticate with your Google Account, your username and/or other identifying information could be visible to others.
 
