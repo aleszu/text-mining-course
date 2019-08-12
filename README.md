@@ -3,7 +3,7 @@ Instructor: [Aleszu Bajak](http://aleszu.com/)
 
 # Introduction
 
-This O'Reilly course will introduce participants to the techniques and applications of **text mining and sentiment analysis** by training them in easy-to-use open-source tools and scalable, replicable methodologies that will make them stronger data scientists and more thoughtful communicators. 
+This [O'Reilly course](https://learning.oreilly.com/live-training/courses/text-mining-and-sentiment-analysis-in-r/0636920309888/) will introduce participants to the techniques and applications of **text mining and sentiment analysis** by training them in easy-to-use open-source tools and scalable, replicable methodologies that will make them stronger data scientists and more thoughtful communicators. 
 
 Using **RStudio** and several engaging and topical datasets sourced from **politics, social science, and social media**, this course will introduce **techniques for collecting, wrangling, mining and analyzing text data**. 
 
