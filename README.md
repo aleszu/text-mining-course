@@ -186,7 +186,11 @@ glimpse(stop_words) # let's inspect stopwords.
 
 ## n-gram analysis
 
-Google's [n-gram viewer](https://books.google.com/ngrams/) is probably the most well-known example of n-gram analysis. We'll use President Donald Trump's 2018 State of the Union speech to explore 1-grams, 2-grams and 3-grams. 
+Google's [n-gram viewer](https://books.google.com/ngrams/) is probably the most well-known example of [n-gram analysis](https://books.google.com/ngrams/graph?content=thou%2Cthy%2Cthee&year_start=1800&year_end=2000&corpus=1&smoothing=3&share=&direct_url=t1%3B%2Cthou%3B%2Cc0%3B.t1%3B%2Cthy%3B%2Cc0%3B.t1%3B%2Cthee%3B%2Cc0). 
+
+![img](img/ngramviewer.png)
+
+We'll use President Donald Trump's 2018 State of the Union speech to explore 1-grams, 2-grams and 3-grams. 
 
 First, we'll ingest the text file, tidy the data and then tokenize the text. 
 
