@@ -600,6 +600,38 @@ ggwordcloud(Obama_words$word, Obama_words$n,
             max.words=50)
 ```
 
+## Wordtrees
+
+I love word trees, like this one from [Jason Davies](https://www.jasondavies.com/wordtree/?source=blowin.in.the.wind.txt&prefix=How) visualizing Bob Dylan lyrics. 
+
+![img](img/dylan-tree.png)
+
+Using the **wordtreer** [package](https://rdrr.io/github/DataStrategist/wordTreeR/man/wordtree.html), which is a wrapper for [Google's Word Tree chart](https://developers.google.com/chart/interactive/docs/gallery/wordtree), one can visualize sentences containing a specific word. Here's some code using many of the techniques we learned previously. 
+
+```{r}
+sou_sentences <- sou %>%
+  filter(president == "Barack Obama") %>%
+  unnest_tokens(sentences, text, token="sentences", to_lower = FALSE) %>%
+  filter(str_detect(sentences, "terror")) %>%
+  select(sentences)
+  
+glimpse(sou_sentences)
+
+sou_all_sentences <- unlist(sou_sentences)
+
+#devtools::install_github("DataStrategist/wordTreeR")
+library(wordtreer)
+
+wordtree(text=sou_all_sentences,
+         targetWord = "terror",
+         direction="double",
+         Number_words = 16,
+         fileName="terror.html")
+browseURL("terror.html")
+```
+
+![img](img/sou-tree.png)
+
 ## Scatterplots and more
 
 In the preceding sections we've created scatterplots, line charts and bar charts. Those were all created with the **ggplot2** package. Let's refresh our memory about the code needed to build a bar chart and a scatterplot. 
