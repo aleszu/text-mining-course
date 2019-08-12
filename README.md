@@ -287,7 +287,7 @@ trigram_counts
 
 ## Doing string calculations
 
-The **stringr** package brings together loads of useful tools for string manipulation and calculation. Below, run through the code to see how str_length() can be used to calculate the length of strings. 
+The **stringr** package brings together loads of useful tools for string manipulation and calculation. Below, run through the code to see how str_length() can be used to calculate the length of strings. Note: str_length() also counts spaces and punctuation.  
 
 ```{r}
 # Calculate length of strings 
