@@ -486,6 +486,8 @@ ggplot(candidate_tweets, aes(date, fill=party)) +
   theme_minimal() 
 ```
 
+![img](img/political-tweets-hist.png)
+
 Next, we tokenize and score the tweets with the labMT dictionary. 
 
 ```{r}
@@ -567,6 +569,8 @@ formattable(Trump_adj,
             )
 ```
 
+![img](img/formattable-table.png)
+
 ## Wordclouds
 
 Although wordclouds have gotten their [fair share of critique](https://www.niemanlab.org/2011/10/word-clouds-considered-harmful/), they can still be powerful. I like the **ggwordcloud** package because it allows a lot of customization, see [here](https://cran.r-project.org/web/packages/ggwordcloud/vignettes/ggwordcloud.html) and [here](https://rdrr.io/cran/ggwordcloud/man/ggwordcloud.html) for more documentation. 
@@ -600,6 +604,8 @@ ggwordcloud(Obama_words$word, Obama_words$n,
             min.freq = 10, 
             max.words=50)
 ```
+
+![img](img/obama-wordcloud.png)
 
 ## Wordtrees
 
