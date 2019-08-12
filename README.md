@@ -606,31 +606,46 @@ I love word trees, like this one from [Jason Davies](https://www.jasondavies.com
 
 ![img](img/dylan-tree.png)
 
-Using the **wordtreer** [package](https://rdrr.io/github/DataStrategist/wordTreeR/man/wordtree.html), which is a wrapper for [Google's Word Tree chart](https://developers.google.com/chart/interactive/docs/gallery/wordtree), one can visualize sentences containing a specific word. Here's some code using many of the techniques we learned previously. 
+Using the **wordtreer** [package](https://rdrr.io/github/DataStrategist/wordTreeR/man/wordtree.html), which is a wrapper for [Google's Word Tree chart](https://developers.google.com/chart/interactive/docs/gallery/wordtree), we can recreate this visualization of Blowin' in the Wind. Note: I used the **datapasta** package to paste these lyrics into RStudio with a simple keyboard shortcut that pastes data from the clipboard as "character vector, formatted vertically, one element per line." Exactly what I needed! 
 
 ```{r}
-sou_sentences <- sou %>%
-  filter(president == "Barack Obama") %>%
-  unnest_tokens(sentences, text, token="sentences", to_lower = FALSE) %>%
-  filter(str_detect(sentences, "terror")) %>%
-  select(sentences)
-  
-glimpse(sou_sentences)
-
-sou_all_sentences <- unlist(sou_sentences)
-
 #devtools::install_github("DataStrategist/wordTreeR")
 library(wordtreer)
 
-wordtree(text=sou_all_sentences,
-         targetWord = "terror",
-         direction="double",
-         Number_words = 16,
-         fileName="terror.html")
-browseURL("terror.html")
+Dylan <- c("How many roads must a man walk down",
+  "Before you call him a man?",
+  "How many seas must a white dove sail",
+  "Before she sleeps in the sand?",
+  "How many times must the cannon balls fly",
+  "Before they're forever banned?",
+  "The answer, my friend, is blowin' in the wind",
+  "The answer is blowin' in the wind",
+  "How many years can a mountain exist",
+  "Before it's washed to the sea?",
+  "How many years can some people exist",
+  "Before they're allowed to be free?",
+  "How many times can a man turn his head",
+  "And pretend that he just doesn't see?",
+  "The answer, my friend, is blowin' in the wind",
+  "The answer is blowin' in the wind",
+  "How many times must a man look up",
+  "Before he can see the sky?",
+  "How many ears must one man have",
+  "Before he can hear people cry?",
+  "How many deaths will it take till he knows",
+  "That too many people have died?",
+  "The answer, my friend, is blowin' in the wind",
+  "The answer is blowin' in the wind")
+
+wordtree(text=Dylan,
+         targetWord = "How",
+         direction="suffix",
+         Number_words = 20,
+         fileName="dylan.html")
+browseURL("dylan.html")
 ```
 
-![img](img/sou-tree.png)
+![img](img/dylan-tree-recreate.png)
 
 ## Scatterplots and more
 
