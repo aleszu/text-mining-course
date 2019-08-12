@@ -65,10 +65,11 @@ Note: Though there are several ways to mine data and perform sentiment analysis 
 
 # Text analysis in the wild
 
-BuzzFeed's [analysis of U.S. State of the Union speeches](https://www.buzzfeednews.com/article/peteraldhous/trump-state-of-the-union-words) over time is a great example of text analysis. As an added bonus, journalist Peter Aldhous shared all his data and open-sourced his methodology as an [Rmarkdown document](https://buzzfeednews.github.io/2018-01-trump-state-of-the-union/).   
+BuzzFeed's [analysis of U.S. State of the Union speeches](https://www.buzzfeednews.com/article/peteraldhous/trump-state-of-the-union-words) over time is a great example of text analysis. As an added bonus, journalist Peter Aldhous shared all his data and open-sourced his methodology as an [Rmarkdown document](https://buzzfeednews.github.io/2018-01-trump-state-of-the-union/). Related: New York Times science graphics editor Jonathan Corum also has a cool State of the Union visualization tool [on his website](http://style.org/stateoftheunion/parse/).  
 
 ![img](img/sotu1.png)
 ![img](img/sotu2.png)
+![img](img/corum-sou.png)
 
 The New York Times' [Mueller Report citations article](https://www.nytimes.com/interactive/2019/04/19/us/politics/mueller-report-citations.html) is another example of a text analysis in mainstream media, used to explain which of and how often Trump's associates appeared in the report. Check out my [Storybench tutorial that includes R code](http://www.storybench.org/how-to-build-a-bubble-chart-of-individuals-mentioned-in-the-mueller-report/) for mining the Mueller Report for specific keywords.  
 
