@@ -648,13 +648,25 @@ browseURL("dylan.html")
 
 ![img](img/dylan-tree-recreate.png)
 
+To create a similar data frame of sentences containing a specified keyword, I've found the following code useful:  
+
+```{r}
+sou_sentences <- sou %>%
+  filter(president == "Barack Obama") %>%
+  unnest_tokens(sentences, text, token="sentences", to_lower = FALSE) %>%
+  filter(str_detect(sentences, "terror")) %>%
+  select(sentences)
+glimpse(sou_sentences)
+sou_all_sentences <- unlist(sou_sentences)
+```
+
 ## Scatterplots and more
 
-In the preceding sections we've created scatterplots, line charts and bar charts. Those were all created with the **ggplot2** package. Let's refresh our memory about the code needed to build a bar chart and a scatterplot. 
+In the preceding sections we've created scatterplots, line charts and bar charts. Those were all created with the **ggplot2** package. Let's refresh our memory about the code needed to build a bar chart, a scatterplot where text replaces points, and a more traditional scatterplot. 
 
-Remember we can customize the axis labels, titles, captions and subtitles in ggplot2. For tips on changing the color scheme, read through [this documentation](https://ggplot2.tidyverse.org/reference/scale_manual.html) and know that a little Googling goes a long way for troubleshooting your visualizations in R. 
+Remember we can customize the axis labels, theme, titles, captions and subtitles in ggplot2. For tips on changing the color scheme, read through [this documentation](https://ggplot2.tidyverse.org/reference/scale_manual.html) and know that a little Googling goes a long way for troubleshooting your visualizations in R. 
 
-**Tip**: [hrbrthemes](https://github.com/hrbrmstr/hrbrthemes) is a great package with several very nice built-in themes. Other packages exist to mimick [FiveThirtyEight](https://rdrr.io/cran/ggthemes/man/theme_fivethirtyeight.html) and [The Economist](https://www.ggplot2-exts.org/ggthemes.html). I'm a big fan of the BBC's [R cookbook](https://bbc.github.io/rcookbook/) which walks users through creating BBC-style graphics.   
+**Tip**: [hrbrthemes](https://github.com/hrbrmstr/hrbrthemes) is a great package with several very nice built-in themes. Other packages exist to mimick [FiveThirtyEight](https://rdrr.io/cran/ggthemes/man/theme_fivethirtyeight.html) and [The Economist](https://www.ggplot2-exts.org/ggthemes.html). I'm a big fan of the BBC's [R cookbook](https://bbc.github.io/rcookbook/) which walks users through creating BBC-style graphics. Having trouble with overlapping labels? Try the **ggrepel** [package](https://cran.r-project.org/web/packages/ggrepel/vignettes/ggrepel.html). 
 
 ```{r}
 # A bar chart
@@ -671,7 +683,6 @@ sent_by_president <- sou %>%
 ggplot(sent_by_president, aes(reorder(president, avgscore), avgscore)) +
   geom_col() +
   coord_flip()
-
 
 # A scatterplot where text replaces points 
 
@@ -693,7 +704,6 @@ ggplot(Trump_adj_sent, aes(n, score, color = score>5)) +
   scale_color_manual(values=c("#c63b3b", "#404f7c")) +
   theme(legend.position = "none")
    
-   
 # A scatterplot with regression lines and title, subtitle and caption
 
 ggplot(final_pivot, aes(y=percent_of_vote, x=avgscore, color=party)) + 
@@ -707,7 +717,6 @@ ggplot(final_pivot, aes(y=percent_of_vote, x=avgscore, color=party)) +
   xlab("Average sentiment of tweets") +
   ylab("Percent of vote in 2018 midterms") +
   theme_minimal()
-
 ```
 
 
