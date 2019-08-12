@@ -150,6 +150,8 @@ First let's do some basic text ingestion and analysis using tidytext functions l
 
 ```{r}
 # Load packages
+#install.packages("tidyverse")
+#install.packages("tidytext")
 library(tidyverse)
 library(tidytext)
 
@@ -551,6 +553,9 @@ write.csv(sou, "state-of-the-union-speeches.csv", row.names=FALSE)
 Properly formatted and designed for comprehension, tables can go a long way in communicating data, whether that's a ranked list or just a random selection of variables. You can create publication-ready tables in RStudio with packages like **[DT](https://rstudio.github.io/DT/)** and **[formattable](https://www.littlemissdata.com/blog/prettytables)**. Here's a preview of what they look like. 
 
 ```{r}
+#install.packages("DT")
+#install.packages("formattable")
+
 library(DT)
 datatable(Trump_adj)
 
@@ -578,6 +583,7 @@ Although wordclouds have gotten their [fair share of critique](https://www.niema
 Let's take the State of the Union addresses and filter for Barack Obama's most frequently used words. Then we'll build two different wordclouds. 
 
 ```{r}
+#install.packages("ggwordcloud")
 library(ggwordcloud)
 
 sou <- read_csv("sou.csv")
