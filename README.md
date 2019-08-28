@@ -29,6 +29,19 @@ Ideally, participants will have the **latest versions of R and RStudio** and the
 This course can also be accessed on **RStudio Cloud** [here](https://rstudio.cloud/project/434664), though a free account is required.
 
 
+## Download repo and set up RStudio
+
+Navigate to the [Github repo](https://github.com/aleszu/text-mining-course/) for this course, click the green "Clone or download" button and then click "Download ZIP." Unzip the file once you've downloaded it. Remember where you've placed the **text-mining-course-master** folder. 
+
+![img](img/downloadrepo.png)
+
+Next, in RStudio, go to *RStudio -> Preferences...* and click "Browse..." under Default working directory. Browse to the unzipped **text-mining-course-master** folder and click "Open." Then hit "Apply." 
+
+![img](img/setwd.png)
+
+Note: The working directory should be set. You may need to restart RStudio. Now, we're ready to begin!
+
+
 # Table of contents
 
 1. [Course outline](#course-outline)
