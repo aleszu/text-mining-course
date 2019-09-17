@@ -169,17 +169,17 @@ ggplot(head(Trump_adj, n=10), aes(reorder(word, n), n)) +
 
 # Sentiment analysis methods
 
-# Sentiment analysis dictionaries
-afinn <- get_sentiments("afinn")
-afinn 
+# Sentiment analysis dictionaries from tidytext package
+afinn <- read_csv("afinn.csv") 
+afinn
 
-bing <- get_sentiments("bing")
+bing <- read_csv("bing.csv") 
 bing
 
-nrc <- get_sentiments("nrc")
+nrc <- read_csv("nrc.csv") 
 nrc
 
-labMT<- read.csv("labMT.csv")
+labMT<- read.csv("labMT.csv") # From the University of Vermont Computational Story Lab
 labMT
 
 
@@ -239,6 +239,7 @@ sentiment_sou_counts_labMT <- sentiment_sou_labMT %>%
 ggplot(sentiment_sou_counts_labMT, aes(date, avgscore)) +
   geom_point() +
   geom_smooth(method="lm")
+
 
 ### Bonus: Applying sentiment analysis to social media
 ### https://www.rollcall.com/news/campaigns/lead-midterms-twitter-republicans-went-high-democrats-went-low
@@ -428,50 +429,9 @@ ggplot(final_pivot, aes(y=percent_of_vote, x=avgscore, color=party)) +
   theme_minimal()
 
 
-# Finally, please complete a course survey!
 
 
-
-
-
-
-
-reddit <- read_csv("reddit_politics_072017_052019.csv.zip") 
-glimpse(reddit)
-hist(reddit$date, breaks = 30)
-
-reddit$title <- reddit$headline # duplicate headline column
-
-reddit_tokenized_pos <- reddit %>%
-  unnest_tokens(word, headline) %>% # tokenize the headlines
-  anti_join(stop_words) %>%
-  inner_join(parts_of_speech) %>% # join parts of speech dictionary
-  glimpse() 
-
-glimpse(reddit_tokenized_pos)
-
-reddit_nouns <- reddit_tokenized_pos %>%
-  filter(pos == "Noun") %>% 
-  count(word, sort = TRUE)
-reddit_nouns
-
-reddit_verbs <- reddit_tokenized_pos %>%
-  filter(str_detect(pos, "Verb")) %>% 
-  count(word, sort = TRUE) 
-reddit_verbs
-
-glimpse(reddit_tokenized_pos)
-
-
-
-
-
-
-
-
-
-
-
+# Activity
 
 reviews <- read_csv("wine-reviews.zip") # https://www.kaggle.com/zynicide/wine-reviews/downloads/wine-reviews.zip/4
 glimpse(reviews)
@@ -515,6 +475,14 @@ french_word_counts <- french_reviews_tokenized %>%
 
 
 
+
+
+# Please complete a course survey!
+
+
+
+
+
 ### Cluster analysis
 
 reviews <- read_csv("wine-reviews.zip")
@@ -549,8 +517,6 @@ french_reviews_corr_dist <- dist(french_reviews_corr_t, method="euclidean") # bu
 fit <- hclust(french_reviews_corr_dist, method="ward.D") # clusters by province  
 plot(fit, family="Arial")
 rect.hclust(fit, k=5, border="cadetblue")  # fit five clusters 
-
-
 
 
 
