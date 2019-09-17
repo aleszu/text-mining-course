@@ -9,8 +9,6 @@
 
 #install.packages("tidytext")
 #install.packages("tidyverse")
-library(tidyverse)
-library(tidytext)
 
 ### Tokenization
 
@@ -104,8 +102,6 @@ trigram_counts
 
 
 
-
-
 # Stringr package
 
 # Calculate length of strings with "str_length"
@@ -130,7 +126,6 @@ ggplot(length_of_sous, aes(date, length)) +
 
 # Search for a string with "str_detect"
 speeches_w_keyword <- sou %>%
-  group_by(text, date, president, message) %>%
   mutate(count = str_count(text, "health care")) # try "people" or "crime" 
 speeches_w_keyword
 
@@ -166,9 +161,6 @@ ggplot(head(Trump_adj, n=10), aes(reorder(word, n), n)) +
   theme_minimal() +
   xlab("")+ 
   coord_flip()
-
-
-
 
 
 
