@@ -1,5 +1,6 @@
 # Text Mining and Sentiment Analysis in R
 Instructor: [Aleszu Bajak](http://aleszu.com/)
+Link: [bit.ly/textcourse](http://bit.ly/textcourse)
 
 # Introduction
 
