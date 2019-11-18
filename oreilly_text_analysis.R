@@ -50,6 +50,8 @@ trump_counts <- trump_speech_tbl %>%
   count(word, sort = TRUE) %>% # count words
   glimpse()
 
+# Too many a's and the's. Let's remove stop words.
+
 trump_counts <- trump_speech_tbl %>%
   unnest_tokens(word, value) %>%
   anti_join(stop_words) %>% # remove stopwords
@@ -67,10 +69,10 @@ bigrams <- trump_speech_tbl %>%
 head(bigrams, n=20) # too many stopwords!
 
 # Better bigrams
-trump_bigrams <- trump_speech_tbl %>%
+bigrams <- trump_speech_tbl %>%
   unnest_tokens(bigram, value, token = "ngrams", n = 2) 
 
-bigrams_separated <- trump_bigrams %>%
+bigrams_separated <- bigrams %>%
   separate(bigram, c("word1", "word2"), sep = " ") # separate bigram by space
 
 bigrams_filtered <- bigrams_separated %>% 
@@ -83,10 +85,10 @@ bigram_counts <- bigrams_filtered %>%
 bigram_counts 
 
 # Trigrams
-trump_trigrams <- trump_speech_tbl %>%
+trigrams <- trump_speech_tbl %>%
   unnest_tokens(trigram, value, token = "ngrams", n = 3) 
 
-trigrams_separated <- trump_trigrams %>%
+trigrams_separated <- trigrams %>%
   separate(trigram, c("word1", "word2", "word3"), sep = " ") # separate bigram by space
 
 trigrams_filtered <- trigrams_separated %>% 
@@ -100,6 +102,12 @@ trigram_counts <- trigrams_filtered %>%
 trigram_counts 
 
 
+# Alternatively, let's substitute in the Dark Knight movie script
+
+darkknight <- read_file("http://storybench.org/datasets/dark-knight.txt") 
+darkknight
+darkknight_tbl <- as_tibble(darkknight) 
+darkknight_tbl
 
 
 # Stringr package
@@ -132,39 +140,6 @@ speeches_w_keyword
 # Plot it
 ggplot(speeches_w_keyword, aes(date,count)) +
   geom_line(stat="identity")
-
-
-### Parts-of-speech analysis
-
-Trump <- read_csv("Trump_tweets.csv")
-glimpse(Trump)
-
-Trump_tokenized_pos <- Trump %>%
-  unnest_tokens(word, text) %>% # tokenize the headlines
-  anti_join(stop_words) %>%
-  inner_join(parts_of_speech) # join parts of speech dictionary
-
-parts_of_speech
-
-glimpse(Trump_tokenized_pos)
-
-Trump_adj <- Trump_tokenized_pos %>%
-  group_by(word) %>% 
-  filter(pos == "Adjective") %>%  # filter for adjectives
-  count(word, sort = TRUE) %>% 
-  glimpse()
-
-head(Trump_adj, n=10)
-
-ggplot(head(Trump_adj, n=10), aes(reorder(word, n), n)) +
-  geom_bar(stat = "identity") +
-  theme_minimal() +
-  xlab("")+ 
-  coord_flip()
-
-
-
-
 
 
 # Sentiment analysis methods
