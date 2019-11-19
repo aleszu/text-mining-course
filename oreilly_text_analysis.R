@@ -216,6 +216,38 @@ ggplot(sentiment_sou_counts_labMT, aes(date, avgscore)) +
   geom_smooth(method="lm")
 
 
+
+
+# Seinfeld TV scripts
+
+seinfeld <- read_csv("http://storybench.org/datasets/seinfeld_scripts.csv")
+glimpse(seinfeld) 
+
+length_of_seinfeld <- seinfeld %>%
+  mutate(length = str_length(text)) %>%
+  glimpse()
+
+ggplot(length_of_seinfeld, aes(air_date, length)) +
+  geom_point() # Notice the seasonality
+
+sentiment_seinfeld <- seinfeld %>%
+  unnest_tokens(word, text) %>%
+  anti_join(stop_words) %>%
+  inner_join(labMT, by="word") %>% 
+  glimpse()
+
+sentiment_seinfeld_per_episode <- sentiment_seinfeld %>%
+  group_by(air_date, title) %>%
+  summarise(avgscore = mean(score)) %>%
+  glimpse()
+
+ggplot(sentiment_seinfeld_per_episode, aes(air_date, avgscore)) +
+  geom_point() +
+  geom_smooth()
+
+
+
+
 ### Bonus: Applying sentiment analysis to social media
 ### https://www.rollcall.com/news/campaigns/lead-midterms-twitter-republicans-went-high-democrats-went-low
 
