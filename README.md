@@ -149,9 +149,13 @@ The community of tidytext users is large and very open to sharing code. Here are
 
 Topic modeling 
 
+![img](img/topic-modeling.jpg)
 
 Cluster analysis 
 
+![img](img/hierarchical-climate-coverage-greennewdeal.png)
+
+![img](img/oct16-bias-final.png)
 
 Principal component analysis
 
