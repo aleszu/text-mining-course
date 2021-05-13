@@ -30,7 +30,7 @@ glimpse(stop_words) # let's inspect stopwords.
 
 
 ############################################
-# Introducing tidytext
+# Introducing tokens and n-gram analysis
 ############################################
 
 trump_speech <- read_file("https://raw.githubusercontent.com/aleszu/text-mining-course/master/trump2018.txt") # alternatively, use read_file(file.choose())
