@@ -145,6 +145,19 @@ The community of tidytext users is large and very open to sharing code. Here are
 
 ![img](img/harrypotter.png)
 
+## More ambitious NLP 
+
+Topic modeling 
+
+
+Cluster analysis 
+
+
+Principal component analysis
+
+![img](img/PCA_trump_clinton.png)
+
+
 
 ## Discussion
 
