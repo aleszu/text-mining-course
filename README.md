@@ -97,6 +97,10 @@ The Boston Globe's [Arresting Words investigation](https://apps.bostonglobe.com/
 
 ![img](img/globe-arresting2.png)
 
+For USA TODAY, I looked at [how the antifa conspiracy theory traveled from the fringe to the floor of Congress](https://www.usatoday.com/in-depth/news/2021/01/12/how-antifa-conspiracy-theory-traveled-fringe-floor-congress/6620908002/) using text anlysis and visualizations of social media data that researchers had cataloged from Parler, 4chan, Gab and Twitter.   
+
+![img](img/antifa-dominion-platforms-usat.png)
+
 
 ## Text analysis in marketing 
 
