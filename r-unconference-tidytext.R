@@ -127,15 +127,20 @@ alexander <- as.tibble(alexander)
 alexander_scored <- alexander %>%
   unnest_tokens(word, value) %>%
   inner_join(vader, by="word") %>% 
-  glimpse()
+  glimpse() 
 
 mean(alexander_scored$score)
+# NOTE: Only 5 of 10 words were actually scored! This becomes very important. 
 
 # Run it on a speech 
 sentiment_sou <- sou %>%
-unnest_tokens(word, text) %>%
+  unnest_tokens(word, text) %>%
+  anti_join(stop_words) %>%
   inner_join(vader, by = "word") 
 glimpse(sentiment_sou)
+# 1.87 million words tokenized! 
+# 733,038 remain after stopwords removed 
+# Only 153,000 words scored 
 
 sentiment_by_president <- sentiment_sou %>%
   group_by(president) %>% 
@@ -158,7 +163,6 @@ ggplot(sentiment_sou_vader, aes(date, avgscore)) +
 # Looks like SOTU's have gotten more negative over time. 
 
 
-
 ########################################################
 # Let's user sentiment analysis on Trump tweets!
 ########################################################
@@ -176,6 +180,7 @@ Trump_vader <- Trump %>%
   mutate(day = lubridate::floor_date(created_at, "day"),
          hour = lubridate::floor_date(created_at, "hour")) %>% 
   unnest_tokens(word, text) %>%
+  anti_join(stop_words) %>% # Not entirely necessary to remove since they're removed by sentiment step
   inner_join(vader, by="word") %>%
   group_by(day 
            #hour
@@ -263,9 +268,12 @@ parler_jan6_biggest_bigram_jumps <- parler_jan6_hr1 %>%
 glimpse(parler_jan6_biggest_bigram_jumps)
 
 parler_jan6_biggest_bigram_jumps <- parler_jan6_biggest_bigram_jumps %>%
-  group_by(bigram, n.x, total.x, n.y, total.y, 
-           hr1_prop, hr2_prop) %>%
-  summarise(change_hr1_hr2 = hr2_prop-hr1_prop) %>%
+  group_by(bigram, 
+           n.x, total.x, 
+           n.y, total.y, 
+           hr1_prop, 
+           hr2_prop) %>%
+  summarise(change_hr1_hr2 = hr2_prop-hr1_prop) %>% # calculate percentage point gap 
   arrange(desc(change_hr1_hr2)) %>%
   na.omit() %>%
   ungroup()
