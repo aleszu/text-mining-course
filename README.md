@@ -95,9 +95,7 @@ FiveThirtyEight published an [analysis tallying](https://fivethirtyeight.com/fea
 
 The Boston Globe's [Arresting Words investigation](https://apps.bostonglobe.com/graphics/2016/04/arresting-words/) visualized transcripts of police arrests to isolate tops words uttered by those being hauled in. 
 
-![img](img/globe-arresting-all.png)
 ![img](img/globe-arresting2.png)
-![img](img/globe-arresting.png)
 
 
 ## Text analysis in marketing 
