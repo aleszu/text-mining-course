@@ -110,9 +110,9 @@ Crimson Hexagon, recently acquired by Brandwatch, delivers "actionable social in
 
 ## Sentiment analysis in the wild
 
-FiveThirtyEight [applied sentiment analysis](https://fivethirtyeight.com/features/the-happiest-and-saddest-fans-in-baseball-according-to-reddit/) to Reddit comments to assess the overall "sadness" of baseball fans summarized by team. 
+FiveThirtyEight used sentiment analysis to help [contrast presidential inauguration speeches](https://fivethirtyeight.com/live-blog/donald-trump-inauguration/). Does the "More positive words" annotation and x-axis ticks make this graphic easier to understand?
 
-![img](img/538-baseball-sad.png)
+![img](img/538-positive-inauguraladdresses.png)
 
 In Roll Call, I [published a sentiment analysis](https://www.rollcall.com/news/campaigns/lead-midterms-twitter-republicans-went-high-democrats-went-low) of tweets by politicians in the run-up to the 2018 Midterms. We'll get into this data and analysis later in this course.  
 
@@ -120,9 +120,9 @@ In Roll Call, I [published a sentiment analysis](https://www.rollcall.com/news/c
 
 ![img](img/rollcall2.png)
 
-FiveThirtyEight used sentiment analysis to help [contrast presidential inauguration speeches](https://fivethirtyeight.com/live-blog/donald-trump-inauguration/). Does the "More positive words" annotation and x-axis ticks make this graphic easier to understand?
+For USA TODAY, I looked at [how calls for civil war intensified on Parler](https://www.usatoday.com/in-depth/news/2021/02/01/civil-war-during-trumps-pre-riot-speech-parler-talk-grew-darker/4297165001/) as Trump urged his followers to march on the Capitol. I used text and sentiment analysis to explore 80,000 posts from Jan. 6. 
 
-![img](img/538-positive-inauguraladdresses.png)
+![img](img/parler-usat.png)
 
 
 ## Sentiment analysis in finance
@@ -130,7 +130,6 @@ FiveThirtyEight used sentiment analysis to help [contrast presidential inaugurat
 Bloomberg routinely analyzes Twitter sentiment surrounding keywords, companies and entities, [such as this 2017 Vodaphone analysis](https://www.bloomberg.com/professional/blog/twitter-trade-profits-vodafone-courts-idea-cellular-india/), to better inform the trading strategies of its clients.
 
 ![img](img/bloomberg.png)
-
 
 J.P. Morgan [has published about sentiment analysis](https://www.jpmorgan.com/global/research/machine-learning) it has applied to analyst reports and news articles to assess the relationship between stock trades and news sentiment.
 
@@ -144,6 +143,7 @@ The community of tidytext users is large and very open to sharing code. Here are
 ![img](img/beeradvocate.png)
 
 ![img](img/harrypotter.png)
+
 
 ## More ambitious NLP 
 
